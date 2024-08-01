@@ -4,6 +4,7 @@ Converts Swagger JSON file to MarkDown, MarkDown Html, MS Word Document
 ## Usage
 
 ### 1. for Rebuild the exe
+Swagger2Doc.exe will be created in  /publish folder
 
 ```PowerShell
 execute the compile.ps1 at the path
