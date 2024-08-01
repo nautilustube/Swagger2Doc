@@ -4,7 +4,6 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NLog;
 using NLog.Extensions.Logging;
-using Swagger2Doc.Helpers;
 using Swagger2Doc.Services;
 using Swagger2Doc.Startup;
 
@@ -42,19 +41,10 @@ namespace Swagger2Doc
                 // Config Setup
                 host.ConfigureAppSetting();
 
-                // HttpClient Setup
-                host.ConfigureServices((hostContext, services) =>
-                {
-                    services.AddCusHttpClient(hostContext.Configuration);
-                });
-
                 // DI Cus Services
                 host.ConfigureServices((hostContext, services) =>
                 {
-                    services.AddScoped<DapperHelper>();                     // Sql Dapper Helper
-                    services.AddTransient<IEmailService, EmailService>();   // Add Email Service
-                    services.AddFluentEmail(hostContext.Configuration);     // 註冊發信服務
-                    services.AddTransient<CoreService>();  // 利害人關係比對發信 Service
+                    services.AddTransient<ConvertService>();
                 });
                 host.UseConsoleLifetime();
 
@@ -65,8 +55,8 @@ namespace Swagger2Doc
                 using (var serviceScope = app.Services.CreateScope())
                 {
                     IServiceProvider serviceProvider = serviceScope.ServiceProvider;
-                    CoreService service1 = serviceProvider.GetService<CoreService>() ?? throw new ArgumentNullException(nameof(CoreService));
-                    await service1.Run();
+                    ConvertService service = serviceProvider.GetService<ConvertService>() ?? throw new ArgumentNullException(nameof(ConvertService));
+                    service.Run();
                 }
             }
             catch (Exception ex)

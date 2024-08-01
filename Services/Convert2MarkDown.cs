@@ -1,21 +1,13 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Readers;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.Xml;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Swagger2Doc.Services
 {
     public class Convert2MarkDown
     {
-
-        public static string CreateMD(OpenApiDocument openApiDocument, OpenApiDiagnostic diagnostic)
+        public string CreateMD(OpenApiDocument openApiDocument, OpenApiDiagnostic diagnostic)
         {
             // 診斷訊息
             if (diagnostic.Errors.Count > 0)
@@ -59,6 +51,39 @@ namespace Swagger2Doc.Services
                         markdownBuilder.AppendLine($"- 描述: {operations.Description}");
                     }
 
+                    // Parameters in url
+                    if (operation.Value.Parameters != null)
+                    {
+                        foreach (var content in operation.Value.Parameters)
+                        {
+
+                            markdownBuilder.AppendLine($"### - 請求參數url:");
+
+                            if (content.Schema!= null && content.Schema.Properties.Any()) 
+                            {
+                                foreach (var param in content.Schema.Properties)
+                                {
+                                    var property = param.Value;
+                                    bool isRequired = content.Schema.Required.Where(x => x.Equals(param.Key)).Any();
+                                    string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
+                                    string requiredHint = isRequired ? "( * )" : "";
+                                    markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} | {property.Description} |");
+                                }
+                            }
+                            
+
+                            // sample JSON
+                            string exampleJson = content.Example?.ToString() ?? String.Empty;
+                            if (content.Schema != null && !content.Examples.Any())
+                            {
+                                exampleJson = GenerateExampleFromSchema(content.Schema);
+                            }
+                            markdownBuilder.AppendLine($"- {content.Name} Request Sample:");
+                            markdownBuilder.AppendLine($"```json");
+                            markdownBuilder.AppendLine($"{IndentJson(exampleJson, 3)}");
+                            markdownBuilder.AppendLine($"```");
+                        }
+                    }
                     // Request
                     if (operation.Value.RequestBody != null && operation.Value.RequestBody.Content != null)
                     {
@@ -93,6 +118,7 @@ namespace Swagger2Doc.Services
                     }
 
 
+
                     // Response
                     if (operation.Value.Responses != null)
                     {
@@ -106,8 +132,11 @@ namespace Swagger2Doc.Services
                             // sample JSON
                             if (response.Value.Content != null)
                             {
-                                GenResponseMarkDownTable(markdownBuilder, response.Value.Content.First().Value.Schema);
-
+                                if (response.Value.Content.FirstOrDefault().Value != null)
+                                {
+                                    GenResponseMarkDownTable(markdownBuilder, response.Value.Content.FirstOrDefault().Value.Schema);
+                                }
+                                
                                 foreach (KeyValuePair<string, OpenApiMediaType> content in response.Value.Content)
                                 {
                                     string exampleJson = content.Value.Example?.ToString() ?? String.Empty;
@@ -154,11 +183,14 @@ namespace Swagger2Doc.Services
 
             // output Markdown
             Console.WriteLine(markdownBuilder.ToString());
-            CoreService.SaveToFile("swagger.md", markdownBuilder.ToString());
+            string currentDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+            currentDirectory = Path.Combine(currentDirectory, "Output");
+            string filePath = Path.Combine(currentDirectory, "swagger.md");
+            ConvertService.SaveToFile(filePath, markdownBuilder.ToString());
             return markdownBuilder.ToString();
         }
 
-        private static void GenSchemasMarkDownTable(StringBuilder markdownBuilder, string name,OpenApiSchema schema)
+        private void GenSchemasMarkDownTable(StringBuilder markdownBuilder, string name,OpenApiSchema schema)
         {
             markdownBuilder.AppendLine($"### - {name}");
             // 示例参数表格
@@ -175,7 +207,7 @@ namespace Swagger2Doc.Services
             }
         }
 
-        private static void GenSecuritySchemeMarkDownTable(StringBuilder markdownBuilder, string name, OpenApiSecurityScheme schema)
+        private void GenSecuritySchemeMarkDownTable(StringBuilder markdownBuilder, string name, OpenApiSecurityScheme schema)
         {
             markdownBuilder.AppendLine($"### - {name}(SecurityScheme)");
 
@@ -184,8 +216,7 @@ namespace Swagger2Doc.Services
             markdownBuilder.AppendLine($"| ( * ) {schema.Name} | {schema.Type} | {schema.Description} | {schema.In} |");
         }
 
-
-        private static void GenResponseMarkDownTable(StringBuilder markdownBuilder, OpenApiSchema schema)
+        private void GenResponseMarkDownTable(StringBuilder markdownBuilder, OpenApiSchema schema)
         {
             markdownBuilder.AppendLine($"### - 回應参数表格:");
             // 示例参数表格
@@ -203,13 +234,12 @@ namespace Swagger2Doc.Services
             }
         }
 
-
         public static string GenerateExampleFromSchema(OpenApiSchema schema)
         {
             return JsonConvert.SerializeObject(GenerateExample(schema), Newtonsoft.Json.Formatting.Indented);
         }
 
-        public static object GenerateExample(OpenApiSchema schema)
+        private static object GenerateExample(OpenApiSchema schema)
         {
             if (schema == null) return null;
             if (schema.Reference != null && schema.Reference.Id.Equals("JToken")) { return null; }
@@ -238,8 +268,7 @@ namespace Swagger2Doc.Services
             }
         }
 
-
-        public static string IndentJson(string json, int indentSize)
+        private string IndentJson(string json, int indentSize)
         {
             var indent = new string(' ', indentSize);
             var lines = json.Split(Environment.NewLine);
@@ -249,8 +278,6 @@ namespace Swagger2Doc.Services
             }
             return string.Join(Environment.NewLine, lines);
         }
-
-
     }
 
 

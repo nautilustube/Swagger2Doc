@@ -4,7 +4,6 @@ using DocumentFormat.OpenXml;
 using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Text;
-using DocumentFormat.OpenXml.EMMA;
 
 namespace Swagger2Doc.Services
 {
@@ -13,7 +12,8 @@ namespace Swagger2Doc.Services
         public void CreateDoc(OpenApiDocument openApiDocument)
         {
 
-            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string currentDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources");
+            currentDirectory = Path.Combine(currentDirectory, "Output");
             string filePath = Path.Combine(currentDirectory, "swagger.docx");
 
             using (WordprocessingDocument wordDocument = WordprocessingDocument.Create(filePath, WordprocessingDocumentType.Document))
@@ -68,6 +68,49 @@ namespace Swagger2Doc.Services
                         else if (!string.IsNullOrEmpty(operations.Description))
                         {
                             AddParagraph(body, $"描述: {operations.Description}");
+                        }
+
+
+                        // Get parameters
+                        if (operation.Value.Parameters != null)
+                        {
+                            AddHeading(body, $"請求參數表格:", "Heading3", 24, "000000");
+                            DataTable dataColName = new DataTable();
+                            dataColName.Columns.Add("Name");
+                            dataColName.Columns.Add("Type");
+                            dataColName.Columns.Add("Description");
+
+                            foreach (var content in operation.Value.Parameters)
+                            {
+
+                                if (content.Schema == null)
+                                { 
+                                    continue;
+                                }
+                                foreach (var param in content.Schema.Properties)
+                                {
+                                    var property = param.Value;
+                                    bool isRequired = content.Schema.Required.Where(x => x.Equals(param.Key)).Any();
+                                    string requiredHint = isRequired ? "( * )" : "";
+                                    string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
+                                    DataRow row = dataColName.NewRow();
+                                    row["Name"] = $"{requiredHint} {param.Key}";
+                                    row["Type"] = $"{property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} ";
+                                    row["Description"] = $"{property.Description}";
+                                    dataColName.Rows.Add(row);
+                                }
+                                AddTableWithFirstRowHeader(body, dataColName);
+                                // sample JSON
+                                AddHeading(body, $"請求參數 Sample:", "Heading3", 24, "000000");
+                                string exampleJson = content.Example?.ToString() ?? String.Empty;
+                                if (content.Schema != null && !content.Examples.Any())
+                                {
+                                    exampleJson = Convert2MarkDown.GenerateExampleFromSchema(content.Schema);
+                                }
+                                AddCodeBlock(body, exampleJson);
+                                AddLineBreak(body);
+                                break;
+                            }
                         }
 
                         // Request
@@ -134,21 +177,25 @@ namespace Swagger2Doc.Services
                                     respDataColName.Columns.Add("Name");
                                     respDataColName.Columns.Add("Type");
                                     respDataColName.Columns.Add("Description");
-                                    var schema = response.Value.Content.First().Value.Schema;
-                                    foreach (var param in schema.Properties)
+                                    var schema = response.Value.Content.FirstOrDefault().Value?.Schema;
+                                    if (schema != null) 
                                     {
-                                        var property = param.Value;
-                                        bool isRequired = schema.Required.Where(x => x.Equals(param.Key)).Any();
-                                        string requiredHint = isRequired ? "( * )" : "";
-                                        string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>": "";
-                                        DataRow respRow = respDataColName.NewRow();
-                                        respRow["Name"] = $"{requiredHint} {param.Key}";
-                                        respRow["Type"] = $"{property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} ";
-                                        respRow["Description"] = $"{property.Description}";
-                                        respDataColName.Rows.Add(respRow);
+                                        foreach (var param in schema.Properties)
+                                        {
+                                            var property = param.Value;
+                                            bool isRequired = schema.Required.Where(x => x.Equals(param.Key)).Any();
+                                            string requiredHint = isRequired ? "( * )" : "";
+                                            string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
+                                            DataRow respRow = respDataColName.NewRow();
+                                            respRow["Name"] = $"{requiredHint} {param.Key}";
+                                            respRow["Type"] = $"{property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} ";
+                                            respRow["Description"] = $"{property.Description}";
+                                            respDataColName.Rows.Add(respRow);
+                                        }
+                                        AddTableWithFirstRowHeader(body, respDataColName);
+                                        AddLineBreak(body);
                                     }
-                                    AddTableWithFirstRowHeader(body, respDataColName);
-                                    AddLineBreak(body);
+                                    
 
                                     foreach (KeyValuePair<string, OpenApiMediaType> content in response.Value.Content)
                                     {
@@ -243,7 +290,7 @@ namespace Swagger2Doc.Services
         /// <param name="markdownBuilder"></param>
         /// <param name="name"></param>
         /// <param name="schema"></param>
-        private static void GenSchemesTable(Body body, string name, OpenApiSchema schema)
+        private void GenSchemesTable(Body body, string name, OpenApiSchema schema)
         {
             AddHeading(body, name, "Heading3", 20, "000000");
             AddLineBreak(body);
@@ -273,7 +320,7 @@ namespace Swagger2Doc.Services
         /// <param name="body"></param>
         /// <param name="name"></param>
         /// <param name="schema"></param>
-        private static void GenSecuritySchemeTable(Body body, string name, OpenApiSecurityScheme schema)
+        private void GenSecuritySchemeTable(Body body, string name, OpenApiSecurityScheme schema)
         {
             AddHeading(body, $"請求驗證限制:", "Heading3", 24, "000000");
             DataTable dataColName = new DataTable();
@@ -292,7 +339,7 @@ namespace Swagger2Doc.Services
         }
 
         #region Common Basic Fn
-        static void AddHeading(Body body, string text, string styleId, int fontSize, string colorHex)
+        private void AddHeading(Body body, string text, string styleId, int fontSize, string colorHex)
         {
             Paragraph heading = new Paragraph();
             Run headingRun = new Run();
@@ -314,9 +361,12 @@ namespace Swagger2Doc.Services
 
             body.Append(heading);
         }
-
-        public static Paragraph GetParagraph(string text)
+        private Paragraph GetParagraph(string text)
         {
+            if (String.IsNullOrEmpty(text)) 
+            {
+                return new Paragraph();
+            }
             RunProperties runProperties = new RunProperties();
             RunFonts runFont = new RunFonts() { Ascii = "Microsoft JhengHei" };
             runProperties.Append(runFont);
@@ -335,13 +385,12 @@ namespace Swagger2Doc.Services
             return paragraph;
         }
 
-
-        static void AddParagraph(Body body, string text)
+        private void AddParagraph(Body body, string text)
         {
             body.Append(GetParagraph(text));
         }
 
-        static void AddTableWithFirstRowHeader(Body body, System.Data.DataTable dataTable)
+        private void AddTableWithFirstRowHeader(Body body, System.Data.DataTable dataTable)
         {
             Table table = new Table();
 
@@ -401,18 +450,18 @@ namespace Swagger2Doc.Services
             body.Append(table);
         }
 
-        public static void AddLineBreak(Body body)
+        private void AddLineBreak(Body body)
         {
             body.AppendChild(new Break());
         }
 
-        static void AddPageBreak(Body body)
+        private void AddPageBreak(Body body)
         {
             Paragraph pageBreakParagraph = new Paragraph(new Run(new Break() { Type = BreakValues.Page }));
             body.Append(pageBreakParagraph);
         }
 
-        static void AddCodeBlock(Body body, string code)
+        private void AddCodeBlock(Body body, string code)
         {
             Paragraph codeParagraph = new Paragraph();
             Run codeRun = new Run();
