@@ -62,19 +62,19 @@ namespace Swagger2Doc.Services
                         // 描述
                         if (!string.IsNullOrEmpty(operations.Summary))
                         {
-                            AddParagraph(body, $"描述: {operations.Summary}");
+                            AddParagraph(body, $"Summary: {operations.Summary}");
 
                         }
                         else if (!string.IsNullOrEmpty(operations.Description))
                         {
-                            AddParagraph(body, $"描述: {operations.Description}");
+                            AddParagraph(body, $"Description: {operations.Description}");
                         }
 
 
                         // Get parameters
                         if (operation.Value.Parameters != null)
                         {
-                            AddHeading(body, $"請求參數表格:", "Heading3", 24, "000000");
+                            AddHeading(body, $"Request Parameter(From Url) Form:", "Heading3", 24, "000000");
                             DataTable dataColName = new DataTable();
                             dataColName.Columns.Add("Name");
                             dataColName.Columns.Add("Type");
@@ -101,7 +101,7 @@ namespace Swagger2Doc.Services
                                 }
                                 AddTableWithFirstRowHeader(body, dataColName);
                                 // sample JSON
-                                AddHeading(body, $"請求參數 Sample:", "Heading3", 24, "000000");
+                                AddHeading(body, $"Request Sample:", "Heading3", 24, "000000");
                                 string exampleJson = content.Example?.ToString() ?? String.Empty;
                                 if (content.Schema != null && !content.Examples.Any())
                                 {
@@ -119,7 +119,7 @@ namespace Swagger2Doc.Services
                             foreach (KeyValuePair<string,OpenApiMediaType> content in operation.Value.RequestBody.Content)
                             {
 
-                                AddHeading(body, $"請求參數表格:", "Heading3", 24, "000000");
+                                AddHeading(body, $"RequestBody Parameter Form:", "Heading3", 24, "000000");
                                 DataTable dataColName = new DataTable();
                                 dataColName.Columns.Add("Name");
                                 dataColName.Columns.Add("Type");
@@ -141,7 +141,7 @@ namespace Swagger2Doc.Services
 
 
                                 // sample JSON
-                                AddHeading(body, $"請求參數 Sample JSON:", "Heading3", 24, "000000");
+                                AddHeading(body, $"Request Sample JSON:", "Heading3", 24, "000000");
                                 string exampleJson = content.Value.Example?.ToString() ?? String.Empty;
                                 if (content.Value.Schema != null && !content.Value.Examples.Any())
                                 {
@@ -172,7 +172,7 @@ namespace Swagger2Doc.Services
                                 // sample JSON
                                 if (response.Value.Content != null)
                                 {
-                                    AddHeading(body, $"回應參數表格:", "Heading3", 24, "000000");
+                                    AddHeading(body, $"Response Parameter Form:", "Heading3", 24, "000000");
                                     DataTable respDataColName = new DataTable();
                                     respDataColName.Columns.Add("Name");
                                     respDataColName.Columns.Add("Type");
@@ -201,7 +201,7 @@ namespace Swagger2Doc.Services
                                     {
 
                                         // sample JSON
-                                        AddHeading(body, $"回應參數 Sample JSON:", "Heading3", 24, "000000");
+                                        AddHeading(body, $"Response Sample JSON:", "Heading3", 24, "000000");
                                         string exampleJson = content.Value.Example?.ToString() ?? String.Empty;
                                         if (content.Value.Schema != null && !content.Value.Examples.Any())
                                         {
@@ -250,18 +250,21 @@ namespace Swagger2Doc.Services
             AddHeading(body, openApi.Info.Title, "Heading1", 48, "000000");
             AddLineBreak(body);
             AddLineBreak(body);
-            AddParagraph(body, openApi.Info.Description.Replace("</br>","\r\n"));
+            if (String.IsNullOrEmpty(openApi.Info.Description) == false) 
+            {
+                AddParagraph(body, openApi.Info.Description.Replace("</br>", "\r\n"));
+            }
             AddLineBreak(body);
 
             // 版本
-            AddHeading(body, openApi.Info.Version, "Heading3", 24, "000000");
+            AddHeading(body, openApi.Info.Version ?? String.Empty, "Heading3", 24, "000000");
             AddLineBreak(body);
 
             // 服務條款
             if (openApi.Info.TermsOfService != null)
             {
                 AddHeading(body, "Terms of service", "Heading3", 24, "000000");
-                AddParagraph(body, openApi.Info.License.Name);
+                AddParagraph(body, openApi.Info.License.Name ?? String.Empty);
                 AddLineBreak(body);
             }
 
@@ -269,8 +272,8 @@ namespace Swagger2Doc.Services
             if (openApi.Info.Contact != null)
             {
                 AddHeading(body, "Contact information", "Heading4", 18, "000000");
-                AddParagraph(body, openApi.Info.Contact.Name);
-                AddParagraph(body,openApi.Info.Contact.Email);
+                AddParagraph(body, openApi.Info.Contact.Name ?? String.Empty);
+                AddParagraph(body,openApi.Info.Contact.Email ?? String.Empty);
                 AddLineBreak(body);
             }
 

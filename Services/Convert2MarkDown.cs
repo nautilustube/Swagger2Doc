@@ -25,6 +25,16 @@ namespace Swagger2Doc.Services
             markdownBuilder.AppendLine($"# {openApiDocument.Info.Title}");
             markdownBuilder.AppendLine($"{openApiDocument.Info.Description}");
 
+            // title 
+            markdownBuilder.AppendLine($"##  SecurityScheme");
+            markdownBuilder.AppendLine($"\n<br><br>\n");
+            foreach (KeyValuePair<string, OpenApiSecurityScheme> securityScheme in openApiDocument.Components.SecuritySchemes)
+            {
+                string name = securityScheme.Key;
+                GenSecuritySchemeMarkDownTable(markdownBuilder, name, securityScheme.Value);
+            }
+            markdownBuilder.AppendLine($"\n<br><br>\n");
+
             int pathCount = 1;
             foreach (KeyValuePair<string, OpenApiPathItem> pathItem in openApiDocument.Paths)
             {
@@ -44,11 +54,11 @@ namespace Swagger2Doc.Services
                     // 描述
                     if (!string.IsNullOrEmpty(operations.Summary))
                     {
-                        markdownBuilder.AppendLine($"- 描述: {operations.Summary}");
+                        markdownBuilder.AppendLine($"- Summary: {operations.Summary}");
                     }
                     else if (!string.IsNullOrEmpty(operations.Description))
                     {
-                        markdownBuilder.AppendLine($"- 描述: {operations.Description}");
+                        markdownBuilder.AppendLine($"- Description: {operations.Description}");
                     }
 
                     // Parameters in url
@@ -57,7 +67,7 @@ namespace Swagger2Doc.Services
                         foreach (var content in operation.Value.Parameters)
                         {
 
-                            markdownBuilder.AppendLine($"### - 請求參數url:");
+                            markdownBuilder.AppendLine($"### - Request Parameter Url:");
 
                             if (content.Schema!= null && content.Schema.Properties.Any()) 
                             {
@@ -90,7 +100,7 @@ namespace Swagger2Doc.Services
                         foreach (var content in operation.Value.RequestBody.Content)
                         {
 
-                            markdownBuilder.AppendLine($"### - 請求參數表格:");
+                            markdownBuilder.AppendLine($"### - Request Parameter Form:");
                             markdownBuilder.AppendLine($"| Name | Type | Description |");
                             markdownBuilder.AppendLine($"|------|------|-------------|");
 
@@ -118,13 +128,12 @@ namespace Swagger2Doc.Services
                     }
 
 
-
                     // Response
                     if (operation.Value.Responses != null)
                     {
                         foreach (var response in operation.Value.Responses)
                         {
-                            markdownBuilder.AppendLine($"### - 回應参数表格:");
+                            markdownBuilder.AppendLine($"### - Response Parameter Form:");
                             markdownBuilder.AppendLine($"| Code | Description |");
                             markdownBuilder.AppendLine($"|------|-------------|");
                             markdownBuilder.AppendLine($"| {response.Key} | {response.Value.Description} |");
@@ -144,7 +153,7 @@ namespace Swagger2Doc.Services
                                     {
                                         exampleJson = GenerateExampleFromSchema(content.Value.Schema);
                                     }
-                                    markdownBuilder.AppendLine($"- {content.Key} 回應Sample JSON:");
+                                    markdownBuilder.AppendLine($"- {content.Key} Response Sample JSON:");
                                     markdownBuilder.AppendLine($"```json");
                                     markdownBuilder.AppendLine($"{IndentJson(exampleJson, 3)}");
                                     markdownBuilder.AppendLine($"```");
@@ -170,16 +179,6 @@ namespace Swagger2Doc.Services
             }
             markdownBuilder.AppendLine($"\n<br><br>\n");
 
-
-            // title 
-            markdownBuilder.AppendLine($"##  SecurityScheme");
-            markdownBuilder.AppendLine($"\n<br><br>\n");
-            foreach (KeyValuePair<string, OpenApiSecurityScheme> securityScheme in openApiDocument.Components.SecuritySchemes)
-            {
-                string name = securityScheme.Key;
-                GenSecuritySchemeMarkDownTable(markdownBuilder, name, securityScheme.Value);
-            }
-            markdownBuilder.AppendLine($"\n<br><br>\n");
 
             // output Markdown
             Console.WriteLine(markdownBuilder.ToString());
