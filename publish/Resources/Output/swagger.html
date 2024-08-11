@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title>Markdown to HTML</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css'>
+    <style>
+  .markdown-body {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0px 20px;
+  }
+  @media (max-width: 767px) {
+    .markdown-body {
+      padding: 15px;
+    }
+  }
+    </style>
+</head>
+<body>
+    <article class="markdown-body">
+        <h1 id="swagger-petstore">Swagger Petstore</h1>
+<p>This is a sample server Petstore server.  You can find out more about Swagger at <a href="http://swagger.io">http://swagger.io</a> or on <a href="http://swagger.io/irc/">irc.freenode.net, #swagger</a>.  For this sample, you can use the api key <code>special-key</code> to test the authorization filters.</p>
+<h2 id="securityscheme">SecurityScheme</h2>
+<p><br><br></p>
+<h3 id="api_keysecurityscheme">- api_key(SecurityScheme)</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) api_key</td>
+<td>ApiKey</td>
+<td></td>
+<td>Header</td>
+</tr>
+</tbody>
+</table>
+<h3 id="petstore_authsecurityscheme">- petstore_auth(SecurityScheme)</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>In</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * )</td>
+<td>OAuth2</td>
+<td></td>
+<td>Query</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="post-pet" petId="">1. <strong>[POST]</strong> /pet/</h2>
+<ul>
+<li>Todo: uploads an image</li>
+</ul>
+<h3 id="request-parameter-url">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) petId</td>
+<td>integer int64</td>
+<td>ID of pet to update</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>petId Request Sample:</li>
+</ul>
+<pre><code class="language-json">   1
+</code></pre>
+<h3 id="request-parameter-form">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>additionalMetadata</td>
+<td>string</td>
+<td>Additional data to pass to server</td>
+</tr>
+<tr>
+<td>file</td>
+<td>string binary</td>
+<td>file to upload</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>multipart/form-data Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;additionalMetadata&quot;: &quot;string&quot;,
+     &quot;file&quot;: &quot;string&quot;
+   }
+</code></pre>
+<h3 id="response-parameter-form">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>integer int32</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;code&quot;: 1,
+     &quot;type&quot;: &quot;string&quot;,
+     &quot;message&quot;: &quot;string&quot;
+   }
+</code></pre>
+<p><br><br></p>
+<h2 id="put-pet">2. <strong>[PUT]</strong> /pet</h2>
+<ul>
+<li>Todo: Update an existing pet</li>
+</ul>
+<h3 id="request-parameter-url-1">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="request-parameter-form-1">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>category</td>
+<td>object   Category</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) photoUrls</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array    <Tag></td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>pet status in the store</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;category&quot;: {
+       &quot;id&quot;: 1,
+       &quot;name&quot;: &quot;string&quot;
+     },
+     &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
+     &quot;photoUrls&quot;: [
+       &quot;string&quot;
+     ],
+     &quot;tags&quot;: [
+       {
+         &quot;id&quot;: 1,
+         &quot;name&quot;: &quot;string&quot;
+       }
+     ],
+     &quot;status&quot;: &quot;string&quot;
+   }
+</code></pre>
+<h3 id="response-parameter-form-1">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-2">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>Pet not found</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-3">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>405</td>
+<td>Validation exception</td>
+</tr>
+</tbody>
+</table>
+<h2 id="post-pet-1">2. <strong>[POST]</strong> /pet</h2>
+<ul>
+<li>Todo: Add a new pet to the store</li>
+</ul>
+<h3 id="request-parameter-url-2">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="request-parameter-form-2">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>category</td>
+<td>object   Category</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) photoUrls</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array    <Tag></td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>pet status in the store</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;category&quot;: {
+       &quot;id&quot;: 1,
+       &quot;name&quot;: &quot;string&quot;
+     },
+     &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
+     &quot;photoUrls&quot;: [
+       &quot;string&quot;
+     ],
+     &quot;tags&quot;: [
+       {
+         &quot;id&quot;: 1,
+         &quot;name&quot;: &quot;string&quot;
+       }
+     ],
+     &quot;status&quot;: &quot;string&quot;
+   }
+</code></pre>
+<h3 id="response-parameter-form-4">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>405</td>
+<td>Invalid input</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-petfindbystatus">3. <strong>[GET]</strong> /pet/findByStatus</h2>
+<ul>
+<li>Todo: Finds Pets by status</li>
+</ul>
+<h3 id="request-parameter-url-3">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) status</td>
+<td>array</td>
+<td>Status values that need to be considered for filter</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>status Request Sample:</li>
+</ul>
+<pre><code class="language-json">   [
+     &quot;string&quot;
+   ]
+</code></pre>
+<h3 id="response-parameter-form-5">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-1">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   [
+     {
+       &quot;id&quot;: 1,
+       &quot;category&quot;: {
+         &quot;id&quot;: 1,
+         &quot;name&quot;: &quot;string&quot;
+       },
+       &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
+       &quot;photoUrls&quot;: [
+         &quot;string&quot;
+       ],
+       &quot;tags&quot;: [
+         {
+           &quot;id&quot;: 1,
+           &quot;name&quot;: &quot;string&quot;
+         }
+       ],
+       &quot;status&quot;: &quot;string&quot;
+     }
+   ]
+</code></pre>
+<h3 id="response-parameter-form-6">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid status value</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-petfindbytags">4. <strong>[GET]</strong> /pet/findByTags</h2>
+<ul>
+<li>Todo: Finds Pets by tags</li>
+</ul>
+<h3 id="request-parameter-url-4">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) tags</td>
+<td>array</td>
+<td>Tags to filter by</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>tags Request Sample:</li>
+</ul>
+<pre><code class="language-json">   [
+     &quot;string&quot;
+   ]
+</code></pre>
+<h3 id="response-parameter-form-7">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-2">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   [
+     {
+       &quot;id&quot;: 1,
+       &quot;category&quot;: {
+         &quot;id&quot;: 1,
+         &quot;name&quot;: &quot;string&quot;
+       },
+       &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
+       &quot;photoUrls&quot;: [
+         &quot;string&quot;
+       ],
+       &quot;tags&quot;: [
+         {
+           &quot;id&quot;: 1,
+           &quot;name&quot;: &quot;string&quot;
+         }
+       ],
+       &quot;status&quot;: &quot;string&quot;
+     }
+   ]
+</code></pre>
+<h3 id="response-parameter-form-8">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid tag value</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-pet" petId="">5. <strong>[GET]</strong> /pet/</h2>
+<ul>
+<li>Todo: Find pet by ID</li>
+</ul>
+<h3 id="request-parameter-url-5">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) petId</td>
+<td>integer int64</td>
+<td>ID of pet to return</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>petId Request Sample:</li>
+</ul>
+<pre><code class="language-json">   1
+</code></pre>
+<h3 id="response-parameter-form-9">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-3">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>category</td>
+<td>object  Category</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) photoUrls</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array   <Tag></td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>pet status in the store</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;category&quot;: {
+       &quot;id&quot;: 1,
+       &quot;name&quot;: &quot;string&quot;
+     },
+     &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
+     &quot;photoUrls&quot;: [
+       &quot;string&quot;
+     ],
+     &quot;tags&quot;: [
+       {
+         &quot;id&quot;: 1,
+         &quot;name&quot;: &quot;string&quot;
+       }
+     ],
+     &quot;status&quot;: &quot;string&quot;
+   }
+</code></pre>
+<h3 id="response-parameter-form-10">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-11">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>Pet not found</td>
+</tr>
+</tbody>
+</table>
+<h2 id="post-pet-2" petId="">5. <strong>[POST]</strong> /pet/</h2>
+<ul>
+<li>Todo: Updates a pet in the store with form data</li>
+</ul>
+<h3 id="request-parameter-url-6">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) petId</td>
+<td>integer int64</td>
+<td>ID of pet that needs to be updated</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>petId Request Sample:</li>
+</ul>
+<pre><code class="language-json">   1
+</code></pre>
+<h3 id="request-parameter-form-3">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Updated name of the pet</td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Updated status of the pet</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/x-www-form-urlencoded Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;name&quot;: &quot;string&quot;,
+     &quot;status&quot;: &quot;string&quot;
+   }
+</code></pre>
+<h3 id="response-parameter-form-12">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>405</td>
+<td>Invalid input</td>
+</tr>
+</tbody>
+</table>
+<h2 id="delete-pet" petId="">5. <strong>[DELETE]</strong> /pet/</h2>
+<ul>
+<li>Todo: Deletes a pet</li>
+</ul>
+<h3 id="request-parameter-url-7">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_key</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>api_key Request Sample:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<p>| ( * ) petId | integer int64   | Pet id to delete |</p>
+<ul>
+<li>petId Request Sample:</li>
+</ul>
+<pre><code class="language-json">   1
+</code></pre>
+<h3 id="response-parameter-form-13">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-14">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>Pet not found</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-storeinventory">6. <strong>[GET]</strong> /store/inventory</h2>
+<ul>
+<li>Todo: Returns pet inventories by status</li>
+</ul>
+<h3 id="request-parameter-url-8">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="response-parameter-form-15">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-4">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {}
+</code></pre>
+<p><br><br></p>
+<h2 id="post-storeorder">7. <strong>[POST]</strong> /store/order</h2>
+<ul>
+<li>Todo: Place an order for a pet</li>
+</ul>
+<h3 id="request-parameter-url-9">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="request-parameter-form-4">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>petId</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>integer int32</td>
+<td></td>
+</tr>
+<tr>
+<td>shipDate</td>
+<td>string date-time</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>boolean</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;petId&quot;: 1,
+     &quot;quantity&quot;: 1,
+     &quot;shipDate&quot;: &quot;string&quot;,
+     &quot;status&quot;: &quot;string&quot;,
+     &quot;complete&quot;: true
+   }
+</code></pre>
+<h3 id="response-parameter-form-16">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-5">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>petId</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>integer int32</td>
+<td></td>
+</tr>
+<tr>
+<td>shipDate</td>
+<td>string date-time</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>boolean</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;petId&quot;: 1,
+     &quot;quantity&quot;: 1,
+     &quot;shipDate&quot;: &quot;string&quot;,
+     &quot;status&quot;: &quot;string&quot;,
+     &quot;complete&quot;: true
+   }
+</code></pre>
+<h3 id="response-parameter-form-17">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid Order</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-storeorder" orderId="">8. <strong>[GET]</strong> /store/order/</h2>
+<ul>
+<li>Todo: Find purchase order by ID</li>
+</ul>
+<h3 id="request-parameter-url-10">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) orderId</td>
+<td>integer int64</td>
+<td>ID of pet that needs to be fetched</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>orderId Request Sample:</li>
+</ul>
+<pre><code class="language-json">   1
+</code></pre>
+<h3 id="response-parameter-form-18">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-6">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>petId</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>integer int32</td>
+<td></td>
+</tr>
+<tr>
+<td>shipDate</td>
+<td>string date-time</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>boolean</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;petId&quot;: 1,
+     &quot;quantity&quot;: 1,
+     &quot;shipDate&quot;: &quot;string&quot;,
+     &quot;status&quot;: &quot;string&quot;,
+     &quot;complete&quot;: true
+   }
+</code></pre>
+<h3 id="response-parameter-form-19">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-20">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>Order not found</td>
+</tr>
+</tbody>
+</table>
+<h2 id="delete-storeorder" orderId="">8. <strong>[DELETE]</strong> /store/order/</h2>
+<ul>
+<li>Todo: Delete purchase order by ID</li>
+</ul>
+<h3 id="request-parameter-url-11">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) orderId</td>
+<td>integer int64</td>
+<td>ID of the order that needs to be deleted</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>orderId Request Sample:</li>
+</ul>
+<pre><code class="language-json">   1
+</code></pre>
+<h3 id="response-parameter-form-21">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-22">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>Order not found</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="post-usercreatewithlist">9. <strong>[POST]</strong> /user/createWithList</h2>
+<ul>
+<li>Todo: Creates list of users with given input array</li>
+</ul>
+<h3 id="request-parameter-url-12">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="request-parameter-form-5">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   [
+     {
+       &quot;id&quot;: 1,
+       &quot;username&quot;: &quot;string&quot;,
+       &quot;firstName&quot;: &quot;string&quot;,
+       &quot;lastName&quot;: &quot;string&quot;,
+       &quot;email&quot;: &quot;string&quot;,
+       &quot;password&quot;: &quot;string&quot;,
+       &quot;phone&quot;: &quot;string&quot;,
+       &quot;userStatus&quot;: 1
+     }
+   ]
+</code></pre>
+<h3 id="response-parameter-form-23">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-user" username="">10. <strong>[GET]</strong> /user/</h2>
+<ul>
+<li>Todo: Get user by user name</li>
+</ul>
+<h3 id="request-parameter-url-13">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) username</td>
+<td>string</td>
+<td>The name that needs to be fetched. Use user1 for testing.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>username Request Sample:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<h3 id="response-parameter-form-24">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-7">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>userStatus</td>
+<td>integer int32</td>
+<td>User Status</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;username&quot;: &quot;string&quot;,
+     &quot;firstName&quot;: &quot;string&quot;,
+     &quot;lastName&quot;: &quot;string&quot;,
+     &quot;email&quot;: &quot;string&quot;,
+     &quot;password&quot;: &quot;string&quot;,
+     &quot;phone&quot;: &quot;string&quot;,
+     &quot;userStatus&quot;: 1
+   }
+</code></pre>
+<h3 id="response-parameter-form-25">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid username supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-26">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>User not found</td>
+</tr>
+</tbody>
+</table>
+<h2 id="put-user" username="">10. <strong>[PUT]</strong> /user/</h2>
+<ul>
+<li>Todo: Updated user</li>
+</ul>
+<h3 id="request-parameter-url-14">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) username</td>
+<td>string</td>
+<td>name that need to be updated</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>username Request Sample:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<h3 id="request-parameter-form-6">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>userStatus</td>
+<td>integer int32</td>
+<td>User Status</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;username&quot;: &quot;string&quot;,
+     &quot;firstName&quot;: &quot;string&quot;,
+     &quot;lastName&quot;: &quot;string&quot;,
+     &quot;email&quot;: &quot;string&quot;,
+     &quot;password&quot;: &quot;string&quot;,
+     &quot;phone&quot;: &quot;string&quot;,
+     &quot;userStatus&quot;: 1
+   }
+</code></pre>
+<h3 id="response-parameter-form-27">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid user supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-28">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>User not found</td>
+</tr>
+</tbody>
+</table>
+<h2 id="delete-user" username="">10. <strong>[DELETE]</strong> /user/</h2>
+<ul>
+<li>Todo: Delete user</li>
+</ul>
+<h3 id="request-parameter-url-15">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) username</td>
+<td>string</td>
+<td>The name that needs to be deleted</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>username Request Sample:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<h3 id="response-parameter-form-29">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid username supplied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="response-parameter-form-30">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>404</td>
+<td>User not found</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-userlogin">11. <strong>[GET]</strong> /user/login</h2>
+<ul>
+<li>Todo: Logs user into the system</li>
+</ul>
+<h3 id="request-parameter-url-16">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( * ) username</td>
+<td>string</td>
+<td>The user name for login</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>username Request Sample:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<p>| ( * ) password | string    | The password for login in clear text |</p>
+<ul>
+<li>password Request Sample:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<h3 id="response-parameter-form-31">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="section-8">- 回應参数表格:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>application/json Response Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   &quot;string&quot;
+</code></pre>
+<h3 id="response-parameter-form-32">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td>Invalid username/password supplied</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="get-userlogout">12. <strong>[GET]</strong> /user/logout</h2>
+<ul>
+<li>Todo: Logs out current logged in user session</li>
+</ul>
+<h3 id="request-parameter-url-17">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="response-parameter-form-33">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="post-usercreatewitharray">13. <strong>[POST]</strong> /user/createWithArray</h2>
+<ul>
+<li>Todo: Creates list of users with given input array</li>
+</ul>
+<h3 id="request-parameter-url-18">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="request-parameter-form-7">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   [
+     {
+       &quot;id&quot;: 1,
+       &quot;username&quot;: &quot;string&quot;,
+       &quot;firstName&quot;: &quot;string&quot;,
+       &quot;lastName&quot;: &quot;string&quot;,
+       &quot;email&quot;: &quot;string&quot;,
+       &quot;password&quot;: &quot;string&quot;,
+       &quot;phone&quot;: &quot;string&quot;,
+       &quot;userStatus&quot;: 1
+     }
+   ]
+</code></pre>
+<h3 id="response-parameter-form-34">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="post-user">14. <strong>[POST]</strong> /user</h2>
+<ul>
+<li>Todo: Create user</li>
+</ul>
+<h3 id="request-parameter-url-19">- Request Parameter Url:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+</table>
+<h3 id="request-parameter-form-8">- Request Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>userStatus</td>
+<td>integer int32</td>
+<td>User Status</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>application/json Request Sample JSON:</li>
+</ul>
+<pre><code class="language-json">   {
+     &quot;id&quot;: 1,
+     &quot;username&quot;: &quot;string&quot;,
+     &quot;firstName&quot;: &quot;string&quot;,
+     &quot;lastName&quot;: &quot;string&quot;,
+     &quot;email&quot;: &quot;string&quot;,
+     &quot;password&quot;: &quot;string&quot;,
+     &quot;phone&quot;: &quot;string&quot;,
+     &quot;userStatus&quot;: 1
+   }
+</code></pre>
+<h3 id="response-parameter-form-35">- Response Parameter Form:</h3>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>successful operation</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<h2 id="schemas">Schemas</h2>
+<p><br><br></p>
+<h3 id="apiresponse">- ApiResponse</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>code</td>
+<td>integer int32</td>
+<td></td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>message</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="category">- Category</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pet">- Pet</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>category</td>
+<td>object  Category</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) name</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>( * ) photoUrls</td>
+<td>array</td>
+<td></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array   <Tag></td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>pet status in the store</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tag">- Tag</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="order">- Order</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>petId</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>integer int32</td>
+<td></td>
+</tr>
+<tr>
+<td>shipDate</td>
+<td>string date-time</td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td>Order Status</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>boolean</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="user">- User</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer int64</td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>firstName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>lastName</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td></td>
+</tr>
+<tr>
+<td>userStatus</td>
+<td>integer int32</td>
+<td>User Status</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+
+    </article>
+</body>
+</html>
