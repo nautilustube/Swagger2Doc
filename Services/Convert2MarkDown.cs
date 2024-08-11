@@ -1,6 +1,7 @@
 ﻿using Microsoft.OpenApi.Models;
 using Microsoft.OpenApi.Readers;
 using Newtonsoft.Json;
+using System.Security.Cryptography.Xml;
 using System.Text;
 
 namespace Swagger2Doc.Services
@@ -50,7 +51,8 @@ namespace Swagger2Doc.Services
                     // title 
                     markdownBuilder.AppendLine($"## {pathCount}. **[{httpMethod}]** {url}");
 
-
+                    string todo = operation.Value.Summary;
+                    markdownBuilder.AppendLine($"- Todo: {todo}");
                     // 描述
                     if (!string.IsNullOrEmpty(operations.Summary))
                     {
@@ -64,22 +66,14 @@ namespace Swagger2Doc.Services
                     // Parameters in url
                     if (operation.Value.Parameters != null)
                     {
+                        markdownBuilder.AppendLine($"### - Request Parameter Url:");
+                        markdownBuilder.AppendLine($"| Name | Type | Description |");
+                        markdownBuilder.AppendLine($"|------|------|-------------|");
                         foreach (var content in operation.Value.Parameters)
                         {
-
-                            markdownBuilder.AppendLine($"### - Request Parameter Url:");
-
-                            if (content.Schema!= null && content.Schema.Properties.Any()) 
-                            {
-                                foreach (var param in content.Schema.Properties)
-                                {
-                                    var property = param.Value;
-                                    bool isRequired = content.Schema.Required.Where(x => x.Equals(param.Key)).Any();
-                                    string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
-                                    string requiredHint = isRequired ? "( * )" : "";
-                                    markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} | {property.Description} |");
-                                }
-                            }
+                            bool isRequired = content.Required;
+                            string requiredHint = isRequired ? "( * )" : "";
+                            markdownBuilder.AppendLine($"| {requiredHint} {content.Name} | {content.Schema?.Type} {content.Schema?.Format} {content.Schema?.Items?.Format} {content.Reference?.Id} | {content.Description} |");
                             
 
                             // sample JSON

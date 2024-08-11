@@ -4,6 +4,7 @@ using DocumentFormat.OpenXml;
 using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Text;
+using System.Security.Cryptography.Xml;
 
 namespace Swagger2Doc.Services
 {
@@ -87,18 +88,15 @@ namespace Swagger2Doc.Services
                                 { 
                                     continue;
                                 }
-                                foreach (var param in content.Schema.Properties)
-                                {
-                                    var property = param.Value;
-                                    bool isRequired = content.Schema.Required.Where(x => x.Equals(param.Key)).Any();
-                                    string requiredHint = isRequired ? "( * )" : "";
-                                    string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
-                                    DataRow row = dataColName.NewRow();
-                                    row["Name"] = $"{requiredHint} {param.Key}";
-                                    row["Type"] = $"{property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} ";
-                                    row["Description"] = $"{property.Description}";
-                                    dataColName.Rows.Add(row);
-                                }
+
+                                bool isRequired = content.Required;
+                                string requiredHint = isRequired ? "( * )" : "";
+                                DataRow row = dataColName.NewRow();
+                                row["Name"] = $"{requiredHint} {content.Name}";
+                                row["Type"] = $"{content.Schema?.Type} {content.Schema?.Format} {content.Schema?.Items?.Format} {content.Reference?.Id}";
+                                row["Description"] = $"{content.Description}";
+                                dataColName.Rows.Add(row);
+
                                 AddTableWithFirstRowHeader(body, dataColName);
                                 // sample JSON
                                 AddHeading(body, $"Request Sample:", "Heading3", 24, "000000");
