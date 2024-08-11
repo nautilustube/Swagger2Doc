@@ -14,6 +14,8 @@ add your swagger.json file in /publish/Resource folder and execute Swagger2Doc.e
 
 swagger.docx¡Bswagger.html¡Bswagger.md will be created in same folder
 
-### 3. file example
+### 3. your api spec file example
 
-[swagger.md](publish/Resources/Output/swagger.md)
+[md](publish/Resources/Output/swagger.md)
+[html](publish/Resources/Output/swagger.html)
+[docx](publish/Resources/Output/swagger.docx)
