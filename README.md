@@ -13,3 +13,7 @@ execute the compile.ps1 at the path
 add your swagger.json file in /publish/Resource folder and execute Swagger2Doc.exe
 
 swagger.docx¡Bswagger.html¡Bswagger.md will be created in same folder
+
+### 3. file example
+
+[swagger.md](publish/Resources/Output/swagger.md)
