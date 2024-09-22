@@ -73,7 +73,7 @@ namespace Swagger2Doc.Services
                         {
                             bool isRequired = content.Required;
                             string requiredHint = isRequired ? "( * )" : "";
-                            markdownBuilder.AppendLine($"| {requiredHint} {content.Name} | {content.Schema?.Type} {content.Schema?.Format} {content.Schema?.Items?.Format} {content.Reference?.Id} | {content.Description} |");
+                            markdownBuilder.AppendLine($"| {requiredHint} {content.Name} | {content.Schema?.Type} {content.Schema?.Format} {content.Schema?.Items?.Format} {content.Reference?.Id} | {content.Description} |".Replace("\r\n", ""));
                             
 
                             // sample JSON
@@ -104,7 +104,7 @@ namespace Swagger2Doc.Services
                                 bool isRequired = content.Value.Schema.Required.Where(x => x.Equals(param.Key)).Any();
                                 string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
                                 string requiredHint = isRequired ? "( * )" : "";
-                                markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} | {property.Description} |");
+                                markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Items?.Format} {property.Reference?.Id} {refernce} | {property.Description} |".Replace("\r\n", ""));
                             }
 
                             // sample JSON
@@ -130,7 +130,7 @@ namespace Swagger2Doc.Services
                             markdownBuilder.AppendLine($"### - Response Parameter Form:");
                             markdownBuilder.AppendLine($"| Code | Description |");
                             markdownBuilder.AppendLine($"|------|-------------|");
-                            markdownBuilder.AppendLine($"| {response.Key} | {response.Value.Description} |");
+                            markdownBuilder.AppendLine($"| {response.Key} | {response.Value.Description} |".Replace("\r\n", ""));
 
                             // sample JSON
                             if (response.Value.Content != null)
@@ -196,7 +196,7 @@ namespace Swagger2Doc.Services
                 bool isRequired = schema.Required.Where(x => x.Equals(param.Key)).Any();
                 string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
                 string requiredHint = isRequired ? "( * )" : "";
-                markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Reference?.Id} {refernce} | {property.Description} |");
+                markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Reference?.Id} {refernce} | {property.Description} |".Replace("\r\n", ""));
             }
         }
 
@@ -206,7 +206,7 @@ namespace Swagger2Doc.Services
 
             markdownBuilder.AppendLine($"| Name | Type | Description | In |");
             markdownBuilder.AppendLine($"|------|------|-------------|----|");
-            markdownBuilder.AppendLine($"| ( * ) {schema.Name} | {schema.Type} | {schema.Description} | {schema.In} |");
+            markdownBuilder.AppendLine($"| ( * ) {schema.Name} | {schema.Type} | {schema.Description} | {schema.In} |".Replace("\r\n", ""));
         }
 
         private void GenResponseMarkDownTable(StringBuilder markdownBuilder, OpenApiSchema schema)
@@ -223,7 +223,7 @@ namespace Swagger2Doc.Services
                 bool isRequired = schema.Required.Where(x => x.Equals(param.Key)).Any();
                 string refernce = (property.Items?.Reference?.Id != null) ? $"<{property.Items?.Reference?.Id}>" : "";
                 string requiredHint = isRequired ? "( * )" : "";
-                markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Reference?.Id} {refernce} | {property.Description} |");
+                markdownBuilder.AppendLine($"| {requiredHint} {param.Key} | {property.Type} {property.Format} {property.Reference?.Id} {refernce} | {property.Description} |".Replace("\r\n", ""));
             }
         }
 
