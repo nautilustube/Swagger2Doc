@@ -229,22 +229,34 @@ namespace Swagger2Doc.Services
 
         public static string GenerateExampleFromSchema(OpenApiSchema schema)
         {
-            return JsonConvert.SerializeObject(GenerateExample(schema), Newtonsoft.Json.Formatting.Indented);
+            var visitedSchemas = new HashSet<string>();
+            return JsonConvert.SerializeObject(GenerateExample(schema, visitedSchemas), Newtonsoft.Json.Formatting.Indented);
         }
 
-        private static object GenerateExample(OpenApiSchema schema)
+        private static object GenerateExample(OpenApiSchema schema, HashSet<string> visitedSchemas)
         {
             if (schema == null) return null;
-            if (schema.Reference != null && schema.Reference.Id.Equals("JToken")) { return null; }
+
+            // 檢測循環引用
+            if (schema.Reference != null)
+            {
+                if (schema.Reference.Id.Equals("JToken")) return null;
+                if (visitedSchemas.Contains(schema.Reference.Id))
+                {
+                    return $"[Circular: {schema.Reference.Id}]";  // 中断循环
+                }
+                visitedSchemas.Add(schema.Reference.Id);
+            }
+
             switch (schema.Type)
             {
                 case "object":
                     return schema.Properties.ToDictionary(
                         prop => prop.Key,
-                        prop => GenerateExample(prop.Value)
+                        prop => GenerateExample(prop.Value, visitedSchemas)
                     );
                 case "array":
-                    return new List<object> { GenerateExample(schema.Items) };
+                    return new List<object> { GenerateExample(schema.Items, visitedSchemas) };
                 case "string":
                     if (schema.Format != null && schema.Format.Equals("uuid"))
                     {
