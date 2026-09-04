@@ -2,8 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Polly;
-using Polly.Extensions.Http;
 
 namespace Swagger2Doc.Startup
 {
@@ -16,7 +14,7 @@ namespace Swagger2Doc.Startup
             {
                 config.SetBasePath(System.AppContext.BaseDirectory);
                 config.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json",
-                                   optional: false,
+                                   optional: true,
                                    reloadOnChange: true);
 
             });

@@ -1,2072 +1,2143 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-    <meta charset='UTF-8'>
-    <title>Markdown to HTML</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css'>
-    <style>
-  .markdown-body {
-    box-sizing: border-box;
-    min-width: 200px;
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 0px 20px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swagger Petstore</title>
+<style>
+  @page { size: A4; margin: 2cm; }
+  body {
+    font-family: "Segoe UI", "Microsoft JhengHei", Meiryo, sans-serif;
+    font-size: 15px; line-height: 1.65; color: #222; background: #fff; margin: 0;
   }
-  @media (max-width: 767px) {
-    .markdown-body {
-      padding: 15px;
-    }
+  .doc { max-width: 1000px; margin: 0 auto; padding: 28px 32px 64px; }
+  h1 { font-size: 26px; margin: 0 0 16px; padding-bottom: 10px; border-bottom: 2px solid #1f3864; color: #1f3864; }
+  h2 { font-size: 20px; margin: 34px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #bbb; color: #1f3864; }
+  h3 { font-size: 16px; margin: 26px 0 10px; color: #1f3864; }
+  h4 { font-size: 14px; margin: 18px 0 8px; color: #444; }
+  p { margin: 8px 0; }
+  ul, ol { margin: 8px 0 8px 22px; padding: 0; }
+  li { margin: 4px 0; }
+  hr { border: 0; border-top: 1px solid #e0e0e0; margin: 26px 0; }
+  a { color: #1155cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  table {
+    border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13.5px;
+    border: 1px solid #7f7f7f;
   }
-    </style>
+  th, td { border: 1px solid #7f7f7f; padding: 6px 9px; vertical-align: top; text-align: left; word-break: break-word; }
+  th { background-color: #e8e8e8; font-weight: 600; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  pre {
+    background-color: #f5f5f5; border: 1px solid #ccc; padding: 10px 12px; overflow-x: auto;
+    font-family: Consolas, "Courier New", monospace; font-size: 12.5px; line-height: 1.45;
+  }
+  pre code { font-size: 12.5px; }
+  blockquote { margin: 10px 0; padding: 2px 12px; border-left: 3px solid #ccc; color: #555; }
+  @media print {
+    .doc { max-width: none; padding: 0; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
 </head>
 <body>
-    <article class="markdown-body">
-        <h1 id="swagger-petstore">Swagger Petstore</h1>
-<p>This is a sample server Petstore server.  You can find out more about Swagger at <a href="http://swagger.io">http://swagger.io</a> or on <a href="http://swagger.io/irc/">irc.freenode.net, #swagger</a>.  For this sample, you can use the api key <code>special-key</code> to test the authorization filters.</p>
-<h2 id="securityscheme">SecurityScheme</h2>
-<p><br><br></p>
-<h3 id="api_keysecurityscheme">- api_key(SecurityScheme)</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>In</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>( * ) api_key</td>
-<td>ApiKey</td>
-<td></td>
-<td>Header</td>
-</tr>
-</tbody>
-</table>
-<h3 id="petstore_authsecurityscheme">- petstore_auth(SecurityScheme)</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>In</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>( * )</td>
-<td>OAuth2</td>
-<td></td>
-<td>Query</td>
-</tr>
-</tbody>
-</table>
-<p><br><br></p>
-<h2 id="post-pet" petId="">1. <strong>[POST]</strong> /pet/</h2>
+<div class="doc">
+<h1 id="swagger-petstore">Swagger Petstore</h1>
+<p>版本 1.0.7｜產生日期 2026-09-04</p>
+<p>This is a sample server Petstore server. You can find out more about Swagger at <a href="http://swagger.io">http://swagger.io</a> or on <a href="http://swagger.io/irc/">irc.freenode.net, #swagger</a>. For this sample, you can use the api key <code>special-key</code> to test the authorization filters.</p>
 <ul>
-<li>Todo: uploads an image</li>
+<li>聯絡窗口： apiteam@swagger.io</li>
+<li>授權：Apache 2.0</li>
 </ul>
-<h3 id="request-parameter-url">- Request Parameter Url:</h3>
+<h2 id="section">服務位址</h2>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>位址</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) petId</td>
-<td>integer int64</td>
+<td><a href="https://petstore.swagger.io/v2">https://petstore.swagger.io/v2</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://petstore.swagger.io/v2">http://petstore.swagger.io/v2</a></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="section-1">安全性驗證</h2>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>參數</th>
+<th>類型</th>
+<th>位置</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_key</td>
+<td>api_key</td>
+<td>ApiKey</td>
+<td>Header</td>
+<td></td>
+</tr>
+<tr>
+<td>petstore_auth</td>
+<td></td>
+<td>OAuth2</td>
+<td>Query</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="api">API 目錄</h2>
+<table petId="" orderId="" username="">
+<thead>
+<tr>
+<th>#</th>
+<th>方法</th>
+<th>路徑</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>POST</td>
+<td><a href="#api-1">/pet//uploadImage</a></td>
+<td>uploads an image</td>
+</tr>
+<tr>
+<td>2</td>
+<td>PUT</td>
+<td><a href="#api-2">/pet</a></td>
+<td>Update an existing pet</td>
+</tr>
+<tr>
+<td>3</td>
+<td>POST</td>
+<td><a href="#api-3">/pet</a></td>
+<td>Add a new pet to the store</td>
+</tr>
+<tr>
+<td>4</td>
+<td>GET</td>
+<td><a href="#api-4">/pet/findByStatus</a></td>
+<td>Finds Pets by status</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GET</td>
+<td><a href="#api-5">/pet/findByTags</a></td>
+<td>Finds Pets by tags</td>
+</tr>
+<tr>
+<td>6</td>
+<td>GET</td>
+<td><a href="#api-6">/pet/</a></td>
+<td>Find pet by ID</td>
+</tr>
+<tr>
+<td>7</td>
+<td>POST</td>
+<td><a href="#api-7">/pet/</a></td>
+<td>Updates a pet in the store with form data</td>
+</tr>
+<tr>
+<td>8</td>
+<td>DELETE</td>
+<td><a href="#api-8">/pet/</a></td>
+<td>Deletes a pet</td>
+</tr>
+<tr>
+<td>9</td>
+<td>GET</td>
+<td><a href="#api-9">/store/inventory</a></td>
+<td>Returns pet inventories by status</td>
+</tr>
+<tr>
+<td>10</td>
+<td>POST</td>
+<td><a href="#api-10">/store/order</a></td>
+<td>Place an order for a pet</td>
+</tr>
+<tr>
+<td>11</td>
+<td>GET</td>
+<td><a href="#api-11">/store/order/</a></td>
+<td>Find purchase order by ID</td>
+</tr>
+<tr>
+<td>12</td>
+<td>DELETE</td>
+<td><a href="#api-12">/store/order/</a></td>
+<td>Delete purchase order by ID</td>
+</tr>
+<tr>
+<td>13</td>
+<td>POST</td>
+<td><a href="#api-13">/user/createWithList</a></td>
+<td>Creates list of users with given input array</td>
+</tr>
+<tr>
+<td>14</td>
+<td>GET</td>
+<td><a href="#api-14">/user/</a></td>
+<td>Get user by user name</td>
+</tr>
+<tr>
+<td>15</td>
+<td>PUT</td>
+<td><a href="#api-15">/user/</a></td>
+<td>Updated user</td>
+</tr>
+<tr>
+<td>16</td>
+<td>DELETE</td>
+<td><a href="#api-16">/user/</a></td>
+<td>Delete user</td>
+</tr>
+<tr>
+<td>17</td>
+<td>GET</td>
+<td><a href="#api-17">/user/login</a></td>
+<td>Logs user into the system</td>
+</tr>
+<tr>
+<td>18</td>
+<td>GET</td>
+<td><a href="#api-18">/user/logout</a></td>
+<td>Logs out current logged in user session</td>
+</tr>
+<tr>
+<td>19</td>
+<td>POST</td>
+<td><a href="#api-19">/user/createWithArray</a></td>
+<td>Creates list of users with given input array</td>
+</tr>
+<tr>
+<td>20</td>
+<td>POST</td>
+<td><a href="#api-20">/user</a></td>
+<td>Create user</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="api-1">API 明細</h2>
+<h3 id="post-pet" petId=""><a id="api-1"></a>1. [POST] /pet/</h3>
+<ul>
+<li>說明：uploads an image</li>
+<li>分類：pet</li>
+<li>代號：<code>uploadFile</code></li>
+</ul>
+<h4 id="path-query-header">請求參數（Path / Query / Header）</h4>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>petId</td>
+<td>Path</td>
+<td>integer(int64)</td>
+<td>是</td>
 <td>ID of pet to update</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>petId Request Sample:</li>
-</ul>
-<pre><code class="language-json">   1
-</code></pre>
-<h3 id="request-parameter-form">- Request Parameter Form:</h3>
+<h4 id="multipartform-data">請求內容（multipart/form-data）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>additionalMetadata</td>
 <td>string</td>
+<td></td>
 <td>Additional data to pass to server</td>
 </tr>
 <tr>
 <td>file</td>
-<td>string binary</td>
+<td>string(binary)</td>
+<td></td>
 <td>file to upload</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>multipart/form-data Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;additionalMetadata&quot;: &quot;string&quot;,
-     &quot;file&quot;: &quot;string&quot;
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;additionalMetadata&quot;: &quot;string&quot;,
+  &quot;file&quot;: &quot;string&quot;
+}
 </code></pre>
-<h3 id="response-parameter-form">- Response Parameter Form:</h3>
+<h4 id="section-2">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json</td>
 </tr>
 </tbody>
 </table>
-<h3 id="section">- 回應参数表格:</h3>
+<h4 id="applicationjson">回應內容 200（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>code</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>message</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;code&quot;: 1,
-     &quot;type&quot;: &quot;string&quot;,
-     &quot;message&quot;: &quot;string&quot;
-   }
+<p>回應範例 200：</p>
+<pre><code class="language-json">{
+  &quot;code&quot;: 0,
+  &quot;type&quot;: &quot;string&quot;,
+  &quot;message&quot;: &quot;string&quot;
+}
 </code></pre>
-<p><br><br></p>
-<h2 id="put-pet">2. <strong>[PUT]</strong> /pet</h2>
+<hr />
+<h3 id="put-pet"><a id="api-2"></a>2. [PUT] /pet</h3>
 <ul>
-<li>Todo: Update an existing pet</li>
+<li>說明：Update an existing pet</li>
+<li>分類：pet</li>
+<li>代號：<code>updatePet</code></li>
 </ul>
-<h3 id="request-parameter-url-1">- Request Parameter Url:</h3>
+<h4 id="applicationjson-1">請求內容（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="request-parameter-form-1">- Request Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>category</td>
-<td>object   Category</td>
+<td>Category</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
-<td>( * ) name</td>
+<td>name</td>
 <td>string</td>
+<td>是</td>
 <td></td>
 </tr>
 <tr>
-<td>( * ) photoUrls</td>
-<td>array</td>
+<td>photoUrls</td>
+<td>array<string></td>
+<td>是</td>
 <td></td>
 </tr>
 <tr>
 <td>tags</td>
-<td>array    <Tag></td>
+<td>array<Tag></td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>pet status in the store</td>
+<td></td>
+<td>pet status in the store 〔可選值：available｜pending｜sold〕</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;category&quot;: {
-       &quot;id&quot;: 1,
-       &quot;name&quot;: &quot;string&quot;
-     },
-     &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
-     &quot;photoUrls&quot;: [
-       &quot;string&quot;
-     ],
-     &quot;tags&quot;: [
-       {
-         &quot;id&quot;: 1,
-         &quot;name&quot;: &quot;string&quot;
-       }
-     ],
-     &quot;status&quot;: &quot;string&quot;
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;category&quot;: {
+    &quot;id&quot;: 0,
+    &quot;name&quot;: &quot;string&quot;
+  },
+  &quot;name&quot;: &quot;doggie&quot;,
+  &quot;photoUrls&quot;: [
+    &quot;string&quot;
+  ],
+  &quot;tags&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;available&quot;
+}
 </code></pre>
-<h3 id="response-parameter-form-1">- Response Parameter Form:</h3>
+<h4 id="section-3">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>400</td>
 <td>Invalid ID supplied</td>
+<td>—</td>
 </tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-2">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>404</td>
 <td>Pet not found</td>
+<td>—</td>
 </tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-3">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>405</td>
 <td>Validation exception</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h2 id="post-pet-1">2. <strong>[POST]</strong> /pet</h2>
+<hr />
+<h3 id="post-pet-1"><a id="api-3"></a>3. [POST] /pet</h3>
 <ul>
-<li>Todo: Add a new pet to the store</li>
+<li>說明：Add a new pet to the store</li>
+<li>分類：pet</li>
+<li>代號：<code>addPet</code></li>
 </ul>
-<h3 id="request-parameter-url-2">- Request Parameter Url:</h3>
+<h4 id="applicationjson-2">請求內容（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="request-parameter-form-2">- Request Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>category</td>
-<td>object   Category</td>
+<td>Category</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
-<td>( * ) name</td>
+<td>name</td>
 <td>string</td>
+<td>是</td>
 <td></td>
 </tr>
 <tr>
-<td>( * ) photoUrls</td>
-<td>array</td>
+<td>photoUrls</td>
+<td>array<string></td>
+<td>是</td>
 <td></td>
 </tr>
 <tr>
 <td>tags</td>
-<td>array    <Tag></td>
+<td>array<Tag></td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>pet status in the store</td>
+<td></td>
+<td>pet status in the store 〔可選值：available｜pending｜sold〕</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;category&quot;: {
-       &quot;id&quot;: 1,
-       &quot;name&quot;: &quot;string&quot;
-     },
-     &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
-     &quot;photoUrls&quot;: [
-       &quot;string&quot;
-     ],
-     &quot;tags&quot;: [
-       {
-         &quot;id&quot;: 1,
-         &quot;name&quot;: &quot;string&quot;
-       }
-     ],
-     &quot;status&quot;: &quot;string&quot;
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;category&quot;: {
+    &quot;id&quot;: 0,
+    &quot;name&quot;: &quot;string&quot;
+  },
+  &quot;name&quot;: &quot;doggie&quot;,
+  &quot;photoUrls&quot;: [
+    &quot;string&quot;
+  ],
+  &quot;tags&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;available&quot;
+}
 </code></pre>
-<h3 id="response-parameter-form-4">- Response Parameter Form:</h3>
+<h4 id="section-4">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>405</td>
 <td>Invalid input</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-petfindbystatus">3. <strong>[GET]</strong> /pet/findByStatus</h2>
+<hr />
+<h3 id="get-petfindbystatus"><a id="api-4"></a>4. [GET] /pet/findByStatus</h3>
 <ul>
-<li>Todo: Finds Pets by status</li>
+<li>說明：Finds Pets by status</li>
+<li>分類：pet</li>
+<li>代號：<code>findPetsByStatus</code></li>
 </ul>
-<h3 id="request-parameter-url-3">- Request Parameter Url:</h3>
+<p>Multiple status values can be provided with comma separated strings</p>
+<h4 id="path-query-header-1">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) status</td>
-<td>array</td>
+<td>status</td>
+<td>Query</td>
+<td>array<string></td>
+<td>是</td>
 <td>Status values that need to be considered for filter</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>status Request Sample:</li>
-</ul>
-<pre><code class="language-json">   [
-     &quot;string&quot;
-   ]
-</code></pre>
-<h3 id="response-parameter-form-5">- Response Parameter Form:</h3>
+<h4 id="section-5">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
 </tr>
-</tbody>
-</table>
-<h3 id="section-1">- 回應参数表格:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   [
-     {
-       &quot;id&quot;: 1,
-       &quot;category&quot;: {
-         &quot;id&quot;: 1,
-         &quot;name&quot;: &quot;string&quot;
-       },
-       &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
-       &quot;photoUrls&quot;: [
-         &quot;string&quot;
-       ],
-       &quot;tags&quot;: [
-         {
-           &quot;id&quot;: 1,
-           &quot;name&quot;: &quot;string&quot;
-         }
-       ],
-       &quot;status&quot;: &quot;string&quot;
-     }
-   ]
-</code></pre>
-<h3 id="response-parameter-form-6">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>400</td>
 <td>Invalid status value</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-petfindbytags">4. <strong>[GET]</strong> /pet/findByTags</h2>
+<h4 id="applicationjson-3">回應內容 200（application/json）</h4>
+<p>型別：<code>array&lt;Pet&gt;</code></p>
+<p>回應範例 200：</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 0,
+    &quot;category&quot;: {
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;
+    },
+    &quot;name&quot;: &quot;doggie&quot;,
+    &quot;photoUrls&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;tags&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;status&quot;: &quot;available&quot;
+  }
+]
+</code></pre>
+<hr />
+<h3 id="get-petfindbytags"><a id="api-5"></a>5. [GET] /pet/findByTags</h3>
 <ul>
-<li>Todo: Finds Pets by tags</li>
+<li>說明：Finds Pets by tags</li>
+<li>分類：pet</li>
+<li>代號：<code>findPetsByTags</code></li>
+<li>狀態：已淘汰（deprecated）</li>
 </ul>
-<h3 id="request-parameter-url-4">- Request Parameter Url:</h3>
+<p>Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.</p>
+<h4 id="path-query-header-2">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) tags</td>
-<td>array</td>
+<td>tags</td>
+<td>Query</td>
+<td>array<string></td>
+<td>是</td>
 <td>Tags to filter by</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>tags Request Sample:</li>
-</ul>
-<pre><code class="language-json">   [
-     &quot;string&quot;
-   ]
-</code></pre>
-<h3 id="response-parameter-form-7">- Response Parameter Form:</h3>
+<h4 id="section-6">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
 </tr>
-</tbody>
-</table>
-<h3 id="section-2">- 回應参数表格:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   [
-     {
-       &quot;id&quot;: 1,
-       &quot;category&quot;: {
-         &quot;id&quot;: 1,
-         &quot;name&quot;: &quot;string&quot;
-       },
-       &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
-       &quot;photoUrls&quot;: [
-         &quot;string&quot;
-       ],
-       &quot;tags&quot;: [
-         {
-           &quot;id&quot;: 1,
-           &quot;name&quot;: &quot;string&quot;
-         }
-       ],
-       &quot;status&quot;: &quot;string&quot;
-     }
-   ]
-</code></pre>
-<h3 id="response-parameter-form-8">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>400</td>
 <td>Invalid tag value</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-pet" petId="">5. <strong>[GET]</strong> /pet/</h2>
+<h4 id="applicationjson-4">回應內容 200（application/json）</h4>
+<p>型別：<code>array&lt;Pet&gt;</code></p>
+<p>回應範例 200：</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 0,
+    &quot;category&quot;: {
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;
+    },
+    &quot;name&quot;: &quot;doggie&quot;,
+    &quot;photoUrls&quot;: [
+      &quot;string&quot;
+    ],
+    &quot;tags&quot;: [
+      {
+        &quot;id&quot;: 0,
+        &quot;name&quot;: &quot;string&quot;
+      }
+    ],
+    &quot;status&quot;: &quot;available&quot;
+  }
+]
+</code></pre>
+<hr />
+<h3 id="get-pet" petId=""><a id="api-6"></a>6. [GET] /pet/</h3>
 <ul>
-<li>Todo: Find pet by ID</li>
+<li>說明：Find pet by ID</li>
+<li>分類：pet</li>
+<li>代號：<code>getPetById</code></li>
 </ul>
-<h3 id="request-parameter-url-5">- Request Parameter Url:</h3>
+<p>Returns a single pet</p>
+<h4 id="path-query-header-3">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) petId</td>
-<td>integer int64</td>
+<td>petId</td>
+<td>Path</td>
+<td>integer(int64)</td>
+<td>是</td>
 <td>ID of pet to return</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>petId Request Sample:</li>
-</ul>
-<pre><code class="language-json">   1
-</code></pre>
-<h3 id="response-parameter-form-9">- Response Parameter Form:</h3>
+<h4 id="section-7">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+<td>—</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Pet not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h3 id="section-3">- 回應参数表格:</h3>
+<h4 id="applicationjson-5">回應內容 200（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>category</td>
-<td>object  Category</td>
+<td>Category</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
-<td>( * ) name</td>
+<td>name</td>
 <td>string</td>
+<td>是</td>
 <td></td>
 </tr>
 <tr>
-<td>( * ) photoUrls</td>
-<td>array</td>
+<td>photoUrls</td>
+<td>array<string></td>
+<td>是</td>
 <td></td>
 </tr>
 <tr>
 <td>tags</td>
-<td>array   <Tag></td>
+<td>array<Tag></td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>pet status in the store</td>
+<td></td>
+<td>pet status in the store 〔可選值：available｜pending｜sold〕</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;category&quot;: {
-       &quot;id&quot;: 1,
-       &quot;name&quot;: &quot;string&quot;
-     },
-     &quot;name&quot;: &quot;Microsoft.OpenApi.Any.OpenApiString&quot;,
-     &quot;photoUrls&quot;: [
-       &quot;string&quot;
-     ],
-     &quot;tags&quot;: [
-       {
-         &quot;id&quot;: 1,
-         &quot;name&quot;: &quot;string&quot;
-       }
-     ],
-     &quot;status&quot;: &quot;string&quot;
-   }
+<p>回應範例 200：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;category&quot;: {
+    &quot;id&quot;: 0,
+    &quot;name&quot;: &quot;string&quot;
+  },
+  &quot;name&quot;: &quot;doggie&quot;,
+  &quot;photoUrls&quot;: [
+    &quot;string&quot;
+  ],
+  &quot;tags&quot;: [
+    {
+      &quot;id&quot;: 0,
+      &quot;name&quot;: &quot;string&quot;
+    }
+  ],
+  &quot;status&quot;: &quot;available&quot;
+}
 </code></pre>
-<h3 id="response-parameter-form-10">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>400</td>
-<td>Invalid ID supplied</td>
-</tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-11">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>404</td>
-<td>Pet not found</td>
-</tr>
-</tbody>
-</table>
-<h2 id="post-pet-2" petId="">5. <strong>[POST]</strong> /pet/</h2>
+<hr />
+<h3 id="post-pet-2" petId=""><a id="api-7"></a>7. [POST] /pet/</h3>
 <ul>
-<li>Todo: Updates a pet in the store with form data</li>
+<li>說明：Updates a pet in the store with form data</li>
+<li>分類：pet</li>
+<li>代號：<code>updatePetWithForm</code></li>
 </ul>
-<h3 id="request-parameter-url-6">- Request Parameter Url:</h3>
+<h4 id="path-query-header-4">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) petId</td>
-<td>integer int64</td>
+<td>petId</td>
+<td>Path</td>
+<td>integer(int64)</td>
+<td>是</td>
 <td>ID of pet that needs to be updated</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>petId Request Sample:</li>
-</ul>
-<pre><code class="language-json">   1
-</code></pre>
-<h3 id="request-parameter-form-3">- Request Parameter Form:</h3>
+<h4 id="applicationx-www-form-urlencoded">請求內容（application/x-www-form-urlencoded）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>name</td>
 <td>string</td>
+<td></td>
 <td>Updated name of the pet</td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
+<td></td>
 <td>Updated status of the pet</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/x-www-form-urlencoded Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;name&quot;: &quot;string&quot;,
-     &quot;status&quot;: &quot;string&quot;
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;string&quot;,
+  &quot;status&quot;: &quot;string&quot;
+}
 </code></pre>
-<h3 id="response-parameter-form-12">- Response Parameter Form:</h3>
+<h4 id="section-8">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>405</td>
 <td>Invalid input</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h2 id="delete-pet" petId="">5. <strong>[DELETE]</strong> /pet/</h2>
+<hr />
+<h3 id="delete-pet" petId=""><a id="api-8"></a>8. [DELETE] /pet/</h3>
 <ul>
-<li>Todo: Deletes a pet</li>
+<li>說明：Deletes a pet</li>
+<li>分類：pet</li>
+<li>代號：<code>deletePet</code></li>
 </ul>
-<h3 id="request-parameter-url-7">- Request Parameter Url:</h3>
+<h4 id="path-query-header-5">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>api_key</td>
+<td>Header</td>
 <td>string</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td>petId</td>
+<td>Path</td>
+<td>integer(int64)</td>
+<td>是</td>
+<td>Pet id to delete</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>api_key Request Sample:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<p>| ( * ) petId | integer int64   | Pet id to delete |</p>
-<ul>
-<li>petId Request Sample:</li>
-</ul>
-<pre><code class="language-json">   1
-</code></pre>
-<h3 id="response-parameter-form-13">- Response Parameter Form:</h3>
+<h4 id="section-9">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>400</td>
 <td>Invalid ID supplied</td>
+<td>—</td>
 </tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-14">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>404</td>
 <td>Pet not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-storeinventory">6. <strong>[GET]</strong> /store/inventory</h2>
+<hr />
+<h3 id="get-storeinventory"><a id="api-9"></a>9. [GET] /store/inventory</h3>
 <ul>
-<li>Todo: Returns pet inventories by status</li>
+<li>說明：Returns pet inventories by status</li>
+<li>分類：store</li>
+<li>代號：<code>getInventory</code></li>
 </ul>
-<h3 id="request-parameter-url-8">- Request Parameter Url:</h3>
+<p>Returns a map of status codes to quantities</p>
+<h4 id="section-10">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="response-parameter-form-15">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json</td>
 </tr>
 </tbody>
 </table>
-<h3 id="section-4">- 回應参数表格:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {}
+<h4 id="applicationjson-6">回應內容 200（application/json）</h4>
+<p>型別：<code>object</code></p>
+<p>回應範例 200：</p>
+<pre><code class="language-json">{}
 </code></pre>
-<p><br><br></p>
-<h2 id="post-storeorder">7. <strong>[POST]</strong> /store/order</h2>
+<hr />
+<h3 id="post-storeorder"><a id="api-10"></a>10. [POST] /store/order</h3>
 <ul>
-<li>Todo: Place an order for a pet</li>
+<li>說明：Place an order for a pet</li>
+<li>分類：store</li>
+<li>代號：<code>placeOrder</code></li>
 </ul>
-<h3 id="request-parameter-url-9">- Request Parameter Url:</h3>
+<h4 id="applicationjson-7">請求內容（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="request-parameter-form-4">- Request Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>petId</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>shipDate</td>
-<td>string date-time</td>
+<td>string(date-time)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Order Status</td>
+<td></td>
+<td>Order Status 〔可選值：placed｜approved｜delivered〕</td>
 </tr>
 <tr>
 <td>complete</td>
 <td>boolean</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;petId&quot;: 1,
-     &quot;quantity&quot;: 1,
-     &quot;shipDate&quot;: &quot;string&quot;,
-     &quot;status&quot;: &quot;string&quot;,
-     &quot;complete&quot;: true
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;petId&quot;: 0,
+  &quot;quantity&quot;: 0,
+  &quot;shipDate&quot;: &quot;2024-01-01T00:00:00&quot;,
+  &quot;status&quot;: &quot;placed&quot;,
+  &quot;complete&quot;: true
+}
 </code></pre>
-<h3 id="response-parameter-form-16">- Response Parameter Form:</h3>
+<h4 id="section-11">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
 </tr>
-</tbody>
-</table>
-<h3 id="section-5">- 回應参数表格:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>integer int64</td>
-<td></td>
-</tr>
-<tr>
-<td>petId</td>
-<td>integer int64</td>
-<td></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>integer int32</td>
-<td></td>
-</tr>
-<tr>
-<td>shipDate</td>
-<td>string date-time</td>
-<td></td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>Order Status</td>
-</tr>
-<tr>
-<td>complete</td>
-<td>boolean</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;petId&quot;: 1,
-     &quot;quantity&quot;: 1,
-     &quot;shipDate&quot;: &quot;string&quot;,
-     &quot;status&quot;: &quot;string&quot;,
-     &quot;complete&quot;: true
-   }
-</code></pre>
-<h3 id="response-parameter-form-17">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>400</td>
 <td>Invalid Order</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-storeorder" orderId="">8. <strong>[GET]</strong> /store/order/</h2>
-<ul>
-<li>Todo: Find purchase order by ID</li>
-</ul>
-<h3 id="request-parameter-url-10">- Request Parameter Url:</h3>
+<h4 id="applicationjson-8">回應內容 200（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) orderId</td>
-<td>integer int64</td>
-<td>ID of pet that needs to be fetched</td>
+<td>id</td>
+<td>integer(int64)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>petId</td>
+<td>integer(int64)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>integer(int32)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>shipDate</td>
+<td>string(date-time)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td></td>
+<td>Order Status 〔可選值：placed｜approved｜delivered〕</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>boolean</td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>orderId Request Sample:</li>
-</ul>
-<pre><code class="language-json">   1
+<p>回應範例 200：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;petId&quot;: 0,
+  &quot;quantity&quot;: 0,
+  &quot;shipDate&quot;: &quot;2024-01-01T00:00:00&quot;,
+  &quot;status&quot;: &quot;placed&quot;,
+  &quot;complete&quot;: true
+}
 </code></pre>
-<h3 id="response-parameter-form-18">- Response Parameter Form:</h3>
+<hr />
+<h3 id="get-storeorder" orderId=""><a id="api-11"></a>11. [GET] /store/order/</h3>
+<ul>
+<li>說明：Find purchase order by ID</li>
+<li>分類：store</li>
+<li>代號：<code>getOrderById</code></li>
+</ul>
+<p>For valid response try integer IDs with value &gt;= 1 and &lt;= 10. Other values will generated exceptions</p>
+<h4 id="path-query-header-6">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>orderId</td>
+<td>Path</td>
+<td>integer(int64)</td>
+<td>是</td>
+<td>ID of pet that needs to be fetched 〔範圍 1 ~ 10〕</td>
+</tr>
+</tbody>
+</table>
+<h4 id="section-12">回應狀態</h4>
+<table>
+<thead>
+<tr>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Invalid ID supplied</td>
+<td>—</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Order not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h3 id="section-6">- 回應参数表格:</h3>
+<h4 id="applicationjson-9">回應內容 200（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>petId</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>shipDate</td>
-<td>string date-time</td>
+<td>string(date-time)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Order Status</td>
+<td></td>
+<td>Order Status 〔可選值：placed｜approved｜delivered〕</td>
 </tr>
 <tr>
 <td>complete</td>
 <td>boolean</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;petId&quot;: 1,
-     &quot;quantity&quot;: 1,
-     &quot;shipDate&quot;: &quot;string&quot;,
-     &quot;status&quot;: &quot;string&quot;,
-     &quot;complete&quot;: true
-   }
+<p>回應範例 200：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;petId&quot;: 0,
+  &quot;quantity&quot;: 0,
+  &quot;shipDate&quot;: &quot;2024-01-01T00:00:00&quot;,
+  &quot;status&quot;: &quot;placed&quot;,
+  &quot;complete&quot;: true
+}
 </code></pre>
-<h3 id="response-parameter-form-19">- Response Parameter Form:</h3>
+<hr />
+<h3 id="delete-storeorder" orderId=""><a id="api-12"></a>12. [DELETE] /store/order/</h3>
+<ul>
+<li>說明：Delete purchase order by ID</li>
+<li>分類：store</li>
+<li>代號：<code>deleteOrder</code></li>
+</ul>
+<p>For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors</p>
+<h4 id="path-query-header-7">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>orderId</td>
+<td>Path</td>
+<td>integer(int64)</td>
+<td>是</td>
+<td>ID of the order that needs to be deleted 〔範圍 1 ~ -〕</td>
+</tr>
+</tbody>
+</table>
+<h4 id="section-13">回應狀態</h4>
+<table>
+<thead>
+<tr>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>400</td>
 <td>Invalid ID supplied</td>
+<td>—</td>
 </tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-20">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>404</td>
 <td>Order not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h2 id="delete-storeorder" orderId="">8. <strong>[DELETE]</strong> /store/order/</h2>
+<hr />
+<h3 id="post-usercreatewithlist"><a id="api-13"></a>13. [POST] /user/createWithList</h3>
 <ul>
-<li>Todo: Delete purchase order by ID</li>
+<li>說明：Creates list of users with given input array</li>
+<li>分類：user</li>
+<li>代號：<code>createUsersWithListInput</code></li>
 </ul>
-<h3 id="request-parameter-url-11">- Request Parameter Url:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>( * ) orderId</td>
-<td>integer int64</td>
-<td>ID of the order that needs to be deleted</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>orderId Request Sample:</li>
-</ul>
-<pre><code class="language-json">   1
+<h4 id="applicationjson-10">請求內容（application/json）</h4>
+<p>型別：<code>array&lt;User&gt;</code></p>
+<p>請求範例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 0,
+    &quot;username&quot;: &quot;string&quot;,
+    &quot;firstName&quot;: &quot;string&quot;,
+    &quot;lastName&quot;: &quot;string&quot;,
+    &quot;email&quot;: &quot;string&quot;,
+    &quot;password&quot;: &quot;string&quot;,
+    &quot;phone&quot;: &quot;string&quot;,
+    &quot;userStatus&quot;: 0
+  }
+]
 </code></pre>
-<h3 id="response-parameter-form-21">- Response Parameter Form:</h3>
+<h4 id="section-14">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>400</td>
-<td>Invalid ID supplied</td>
-</tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-22">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>404</td>
-<td>Order not found</td>
-</tr>
-</tbody>
-</table>
-<p><br><br></p>
-<h2 id="post-usercreatewithlist">9. <strong>[POST]</strong> /user/createWithList</h2>
-<ul>
-<li>Todo: Creates list of users with given input array</li>
-</ul>
-<h3 id="request-parameter-url-12">- Request Parameter Url:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="request-parameter-form-5">- Request Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   [
-     {
-       &quot;id&quot;: 1,
-       &quot;username&quot;: &quot;string&quot;,
-       &quot;firstName&quot;: &quot;string&quot;,
-       &quot;lastName&quot;: &quot;string&quot;,
-       &quot;email&quot;: &quot;string&quot;,
-       &quot;password&quot;: &quot;string&quot;,
-       &quot;phone&quot;: &quot;string&quot;,
-       &quot;userStatus&quot;: 1
-     }
-   ]
-</code></pre>
-<h3 id="response-parameter-form-23">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>default</td>
 <td>successful operation</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-user" username="">10. <strong>[GET]</strong> /user/</h2>
+<hr />
+<h3 id="get-user" username=""><a id="api-14"></a>14. [GET] /user/</h3>
 <ul>
-<li>Todo: Get user by user name</li>
+<li>說明：Get user by user name</li>
+<li>分類：user</li>
+<li>代號：<code>getUserByName</code></li>
 </ul>
-<h3 id="request-parameter-url-13">- Request Parameter Url:</h3>
+<h4 id="path-query-header-8">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) username</td>
+<td>username</td>
+<td>Path</td>
 <td>string</td>
+<td>是</td>
 <td>The name that needs to be fetched. Use user1 for testing.</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>username Request Sample:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<h3 id="response-parameter-form-24">- Response Parameter Form:</h3>
+<h4 id="section-15">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
+</tr>
+<tr>
+<td>400</td>
+<td>Invalid username supplied</td>
+<td>—</td>
+</tr>
+<tr>
+<td>404</td>
+<td>User not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h3 id="section-7">- 回應参数表格:</h3>
+<h4 id="applicationjson-11">回應內容 200（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>username</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>firstName</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>password</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>userStatus</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td>User Status</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;username&quot;: &quot;string&quot;,
-     &quot;firstName&quot;: &quot;string&quot;,
-     &quot;lastName&quot;: &quot;string&quot;,
-     &quot;email&quot;: &quot;string&quot;,
-     &quot;password&quot;: &quot;string&quot;,
-     &quot;phone&quot;: &quot;string&quot;,
-     &quot;userStatus&quot;: 1
-   }
+<p>回應範例 200：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;username&quot;: &quot;string&quot;,
+  &quot;firstName&quot;: &quot;string&quot;,
+  &quot;lastName&quot;: &quot;string&quot;,
+  &quot;email&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;userStatus&quot;: 0
+}
 </code></pre>
-<h3 id="response-parameter-form-25">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>400</td>
-<td>Invalid username supplied</td>
-</tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-26">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>404</td>
-<td>User not found</td>
-</tr>
-</tbody>
-</table>
-<h2 id="put-user" username="">10. <strong>[PUT]</strong> /user/</h2>
+<hr />
+<h3 id="put-user" username=""><a id="api-15"></a>15. [PUT] /user/</h3>
 <ul>
-<li>Todo: Updated user</li>
+<li>說明：Updated user</li>
+<li>分類：user</li>
+<li>代號：<code>updateUser</code></li>
 </ul>
-<h3 id="request-parameter-url-14">- Request Parameter Url:</h3>
+<p>This can only be done by the logged in user.</p>
+<h4 id="path-query-header-9">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) username</td>
+<td>username</td>
+<td>Path</td>
 <td>string</td>
+<td>是</td>
 <td>name that need to be updated</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>username Request Sample:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<h3 id="request-parameter-form-6">- Request Parameter Form:</h3>
+<h4 id="applicationjson-12">請求內容（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>username</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>firstName</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>password</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>userStatus</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td>User Status</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;username&quot;: &quot;string&quot;,
-     &quot;firstName&quot;: &quot;string&quot;,
-     &quot;lastName&quot;: &quot;string&quot;,
-     &quot;email&quot;: &quot;string&quot;,
-     &quot;password&quot;: &quot;string&quot;,
-     &quot;phone&quot;: &quot;string&quot;,
-     &quot;userStatus&quot;: 1
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;username&quot;: &quot;string&quot;,
+  &quot;firstName&quot;: &quot;string&quot;,
+  &quot;lastName&quot;: &quot;string&quot;,
+  &quot;email&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;userStatus&quot;: 0
+}
 </code></pre>
-<h3 id="response-parameter-form-27">- Response Parameter Form:</h3>
+<h4 id="section-16">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>400</td>
 <td>Invalid user supplied</td>
+<td>—</td>
 </tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-28">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>404</td>
 <td>User not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<h2 id="delete-user" username="">10. <strong>[DELETE]</strong> /user/</h2>
+<hr />
+<h3 id="delete-user" username=""><a id="api-16"></a>16. [DELETE] /user/</h3>
 <ul>
-<li>Todo: Delete user</li>
+<li>說明：Delete user</li>
+<li>分類：user</li>
+<li>代號：<code>deleteUser</code></li>
 </ul>
-<h3 id="request-parameter-url-15">- Request Parameter Url:</h3>
+<p>This can only be done by the logged in user.</p>
+<h4 id="path-query-header-10">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) username</td>
+<td>username</td>
+<td>Path</td>
 <td>string</td>
+<td>是</td>
 <td>The name that needs to be deleted</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>username Request Sample:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<h3 id="response-parameter-form-29">- Response Parameter Form:</h3>
+<h4 id="section-17">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>400</td>
 <td>Invalid username supplied</td>
+<td>—</td>
 </tr>
-</tbody>
-</table>
-<h3 id="response-parameter-form-30">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>404</td>
 <td>User not found</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-userlogin">11. <strong>[GET]</strong> /user/login</h2>
+<hr />
+<h3 id="get-userlogin"><a id="api-17"></a>17. [GET] /user/login</h3>
 <ul>
-<li>Todo: Logs user into the system</li>
+<li>說明：Logs user into the system</li>
+<li>分類：user</li>
+<li>代號：<code>loginUser</code></li>
 </ul>
-<h3 id="request-parameter-url-16">- Request Parameter Url:</h3>
+<h4 id="path-query-header-11">請求參數（Path / Query / Header）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>參數</th>
+<th>位置</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>( * ) username</td>
+<td>username</td>
+<td>Query</td>
 <td>string</td>
+<td>是</td>
 <td>The user name for login</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Query</td>
+<td>string</td>
+<td>是</td>
+<td>The password for login in clear text</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>username Request Sample:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<p>| ( * ) password | string    | The password for login in clear text |</p>
-<ul>
-<li>password Request Sample:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<h3 id="response-parameter-form-31">- Response Parameter Form:</h3>
+<h4 id="section-18">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>200</td>
 <td>successful operation</td>
+<td>application/json、application/xml</td>
 </tr>
-</tbody>
-</table>
-<h3 id="section-8">- 回應参数表格:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>application/json Response Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   &quot;string&quot;
-</code></pre>
-<h3 id="response-parameter-form-32">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>400</td>
 <td>Invalid username/password supplied</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="get-userlogout">12. <strong>[GET]</strong> /user/logout</h2>
-<ul>
-<li>Todo: Logs out current logged in user session</li>
-</ul>
-<h3 id="request-parameter-url-17">- Request Parameter Url:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="response-parameter-form-33">- Response Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Code</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>default</td>
-<td>successful operation</td>
-</tr>
-</tbody>
-</table>
-<p><br><br></p>
-<h2 id="post-usercreatewitharray">13. <strong>[POST]</strong> /user/createWithArray</h2>
-<ul>
-<li>Todo: Creates list of users with given input array</li>
-</ul>
-<h3 id="request-parameter-url-18">- Request Parameter Url:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<h3 id="request-parameter-form-7">- Request Parameter Form:</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-</table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   [
-     {
-       &quot;id&quot;: 1,
-       &quot;username&quot;: &quot;string&quot;,
-       &quot;firstName&quot;: &quot;string&quot;,
-       &quot;lastName&quot;: &quot;string&quot;,
-       &quot;email&quot;: &quot;string&quot;,
-       &quot;password&quot;: &quot;string&quot;,
-       &quot;phone&quot;: &quot;string&quot;,
-       &quot;userStatus&quot;: 1
-     }
-   ]
+<h4 id="applicationjson-13">回應內容 200（application/json）</h4>
+<p>型別：<code>string</code></p>
+<p>回應範例 200：</p>
+<pre><code class="language-json">&quot;string&quot;
 </code></pre>
-<h3 id="response-parameter-form-34">- Response Parameter Form:</h3>
+<hr />
+<h3 id="get-userlogout"><a id="api-18"></a>18. [GET] /user/logout</h3>
+<ul>
+<li>說明：Logs out current logged in user session</li>
+<li>分類：user</li>
+<li>代號：<code>logoutUser</code></li>
+</ul>
+<h4 id="section-19">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>default</td>
 <td>successful operation</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="post-user">14. <strong>[POST]</strong> /user</h2>
+<hr />
+<h3 id="post-usercreatewitharray"><a id="api-19"></a>19. [POST] /user/createWithArray</h3>
 <ul>
-<li>Todo: Create user</li>
+<li>說明：Creates list of users with given input array</li>
+<li>分類：user</li>
+<li>代號：<code>createUsersWithArrayInput</code></li>
 </ul>
-<h3 id="request-parameter-url-19">- Request Parameter Url:</h3>
+<h4 id="applicationjson-14">請求內容（application/json）</h4>
+<p>型別：<code>array&lt;User&gt;</code></p>
+<p>請求範例：</p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 0,
+    &quot;username&quot;: &quot;string&quot;,
+    &quot;firstName&quot;: &quot;string&quot;,
+    &quot;lastName&quot;: &quot;string&quot;,
+    &quot;email&quot;: &quot;string&quot;,
+    &quot;password&quot;: &quot;string&quot;,
+    &quot;phone&quot;: &quot;string&quot;,
+    &quot;userStatus&quot;: 0
+  }
+]
+</code></pre>
+<h4 id="section-20">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>successful operation</td>
+<td>—</td>
+</tr>
+</tbody>
 </table>
-<h3 id="request-parameter-form-8">- Request Parameter Form:</h3>
+<hr />
+<h3 id="post-user"><a id="api-20"></a>20. [POST] /user</h3>
+<ul>
+<li>說明：Create user</li>
+<li>分類：user</li>
+<li>代號：<code>createUser</code></li>
+</ul>
+<p>This can only be done by the logged in user.</p>
+<h4 id="applicationjson-15">請求內容（application/json）</h4>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>username</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>firstName</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>password</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>userStatus</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td>User Status</td>
 </tr>
 </tbody>
 </table>
-<ul>
-<li>application/json Request Sample JSON:</li>
-</ul>
-<pre><code class="language-json">   {
-     &quot;id&quot;: 1,
-     &quot;username&quot;: &quot;string&quot;,
-     &quot;firstName&quot;: &quot;string&quot;,
-     &quot;lastName&quot;: &quot;string&quot;,
-     &quot;email&quot;: &quot;string&quot;,
-     &quot;password&quot;: &quot;string&quot;,
-     &quot;phone&quot;: &quot;string&quot;,
-     &quot;userStatus&quot;: 1
-   }
+<p>請求範例：</p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 0,
+  &quot;username&quot;: &quot;string&quot;,
+  &quot;firstName&quot;: &quot;string&quot;,
+  &quot;lastName&quot;: &quot;string&quot;,
+  &quot;email&quot;: &quot;string&quot;,
+  &quot;password&quot;: &quot;string&quot;,
+  &quot;phone&quot;: &quot;string&quot;,
+  &quot;userStatus&quot;: 0
+}
 </code></pre>
-<h3 id="response-parameter-form-35">- Response Parameter Form:</h3>
+<h4 id="section-21">回應狀態</h4>
 <table>
 <thead>
 <tr>
-<th>Code</th>
-<th>Description</th>
+<th>狀態碼</th>
+<th>說明</th>
+<th>內容型別</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>default</td>
 <td>successful operation</td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-<h2 id="schemas">Schemas</h2>
-<p><br><br></p>
-<h3 id="apiresponse">- ApiResponse</h3>
+<hr />
+<h2 id="section-22">資料模型</h2>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>模型</th>
+<th>欄位數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="#schema-ApiResponse">ApiResponse</a></td>
+<td>3</td>
+</tr>
+<tr>
+<td><a href="#schema-Category">Category</a></td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href="#schema-Order">Order</a></td>
+<td>6</td>
+</tr>
+<tr>
+<td><a href="#schema-Pet">Pet</a></td>
+<td>6</td>
+</tr>
+<tr>
+<td><a href="#schema-Tag">Tag</a></td>
+<td>2</td>
+</tr>
+<tr>
+<td><a href="#schema-User">User</a></td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<h3 id="apiresponse"><a id="schema-ApiResponse"></a>ApiResponse</h3>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>code</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>type</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>message</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="category">- Category</h3>
+<h3 id="category"><a id="schema-Category"></a>Category</h3>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>name</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="pet">- Pet</h3>
+<h3 id="order"><a id="schema-Order"></a>Order</h3>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
 <td></td>
-</tr>
-<tr>
-<td>category</td>
-<td>object  Category</td>
-<td></td>
-</tr>
-<tr>
-<td>( * ) name</td>
-<td>string</td>
-<td></td>
-</tr>
-<tr>
-<td>( * ) photoUrls</td>
-<td>array</td>
-<td></td>
-</tr>
-<tr>
-<td>tags</td>
-<td>array   <Tag></td>
-<td></td>
-</tr>
-<tr>
-<td>status</td>
-<td>string</td>
-<td>pet status in the store</td>
-</tr>
-</tbody>
-</table>
-<h3 id="tag">- Tag</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>integer int64</td>
-<td></td>
-</tr>
-<tr>
-<td>name</td>
-<td>string</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="order">- Order</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id</td>
-<td>integer int64</td>
 <td></td>
 </tr>
 <tr>
 <td>petId</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>quantity</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>shipDate</td>
-<td>string date-time</td>
+<td>string(date-time)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>status</td>
 <td>string</td>
-<td>Order Status</td>
+<td></td>
+<td>Order Status 〔可選值：placed｜approved｜delivered〕</td>
 </tr>
 <tr>
 <td>complete</td>
 <td>boolean</td>
 <td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h3 id="user">- User</h3>
+<h3 id="pet"><a id="schema-Pet"></a>Pet</h3>
 <table>
 <thead>
 <tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>id</td>
-<td>integer int64</td>
+<td>integer(int64)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>category</td>
+<td>Category</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>是</td>
+<td></td>
+</tr>
+<tr>
+<td>photoUrls</td>
+<td>array<string></td>
+<td>是</td>
+<td></td>
+</tr>
+<tr>
+<td>tags</td>
+<td>array<Tag></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>status</td>
+<td>string</td>
+<td></td>
+<td>pet status in the store 〔可選值：available｜pending｜sold〕</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tag"><a id="schema-Tag"></a>Tag</h3>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer(int64)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="user"><a id="schema-User"></a>User</h3>
+<table>
+<thead>
+<tr>
+<th>欄位</th>
+<th>類型</th>
+<th>必填</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer(int64)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>username</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>firstName</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>lastName</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>email</td>
 <td>string</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td>password</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>phone</td>
 <td>string</td>
 <td></td>
+<td></td>
 </tr>
 <tr>
 <td>userStatus</td>
-<td>integer int32</td>
+<td>integer(int32)</td>
+<td></td>
 <td>User Status</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
 
-    </article>
+</div>
 </body>
 </html>

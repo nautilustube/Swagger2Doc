@@ -1,27 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
 <head>
-    <meta charset='UTF-8'>
-    <title>Markdown to HTML</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css'>
-    <style>
-  .markdown-body {
-    box-sizing: border-box;
-    min-width: 200px;
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 0px 20px;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>:htmlTitle</title>
+<style>
+  @page { size: A4; margin: 2cm; }
+  body {
+    font-family: "Segoe UI", "Microsoft JhengHei", Meiryo, sans-serif;
+    font-size: 15px; line-height: 1.65; color: #222; background: #fff; margin: 0;
   }
-  @media (max-width: 767px) {
-    .markdown-body {
-      padding: 15px;
-    }
+  .doc { max-width: 1000px; margin: 0 auto; padding: 28px 32px 64px; }
+  h1 { font-size: 26px; margin: 0 0 16px; padding-bottom: 10px; border-bottom: 2px solid #1f3864; color: #1f3864; }
+  h2 { font-size: 20px; margin: 34px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #bbb; color: #1f3864; }
+  h3 { font-size: 16px; margin: 26px 0 10px; color: #1f3864; }
+  h4 { font-size: 14px; margin: 18px 0 8px; color: #444; }
+  p { margin: 8px 0; }
+  ul, ol { margin: 8px 0 8px 22px; padding: 0; }
+  li { margin: 4px 0; }
+  hr { border: 0; border-top: 1px solid #e0e0e0; margin: 26px 0; }
+  a { color: #1155cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  table {
+    border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13.5px;
+    border: 1px solid #7f7f7f;
   }
-    </style>
+  th, td { border: 1px solid #7f7f7f; padding: 6px 9px; vertical-align: top; text-align: left; word-break: break-word; }
+  th { background-color: #e8e8e8; font-weight: 600; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 13px; }
+  pre {
+    background-color: #f5f5f5; border: 1px solid #ccc; padding: 10px 12px; overflow-x: auto;
+    font-family: Consolas, "Courier New", monospace; font-size: 12.5px; line-height: 1.45;
+  }
+  pre code { font-size: 12.5px; }
+  blockquote { margin: 10px 0; padding: 2px 12px; border-left: 3px solid #ccc; color: #555; }
+  @media print {
+    .doc { max-width: none; padding: 0; }
+    h2 { page-break-after: avoid; }
+    table { page-break-inside: auto; }
+    tr { page-break-inside: avoid; }
+  }
+</style>
 </head>
 <body>
-    <article class="markdown-body">
-        :htmlContent
-    </article>
+<div class="doc">
+:htmlContent
+</div>
 </body>
 </html>
